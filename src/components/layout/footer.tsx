@@ -1,6 +1,6 @@
 "use client"
 
-import { FaGithub, FaTwitter, FaLinkedinIn } from "react-icons/fa"
+import { FaGithub, FaTwitter, FaLinkedinIn, FaArrowRight } from "react-icons/fa"
 import { siteData } from "@/data/site"
 
 const GitHubIcon = ({ size = 24, className = "" }: { size?: number; className?: string }) => (
@@ -81,6 +81,19 @@ export default function Footer() {
           <p className="text-gray-600 dark:text-gray-300">
             Phone: +1 (555) 123-4567
           </p>
+            <a
+                href="dashboard"
+                aria-label="admin dashboard"
+                className="group relative ml-auto hidden shrink-0 items-center justify-between gap-4 overflow-hidden rounded-full bg-[#FF5500] py-1.5 pl-5 pr-1.5 font-heading text-sm font-semibold text-white shadow-md motion-safe:transition-colors duration-500 ease-out hover:text-[#FF5500] md:inline-flex"
+              >
+                <span className="pointer-events-none absolute right-1.5 top-1/2 h-7 w-7 -translate-y-1/2 rounded-full bg-white motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-out motion-safe:group-hover:scale-[10]" />
+                <span className="relative z-10 motion-safe:transition-colors duration-500 group-hover:text-[#FF5500]">
+                  Admin Dashboard
+                </span>
+                <span className="relative z-10 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white motion-safe:transition-transform duration-300 group-hover:translate-x-0.5">
+                  <FaArrowRight className="h-3.5 w-3.5 text-[#FF5500]" />
+                </span>
+              </a>
         </div>
       </div>
       <div className="mt-10 border-t border-gray-200 pt-10 text-center text-sm text-gray-500 dark:border-gray-700 dark:text-gray-400">

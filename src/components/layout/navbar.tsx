@@ -137,7 +137,7 @@ function Logo({ logoSrc, logoText }: { logoSrc?: string; logoText?: string }) {
 function PmbButton() {
   return (
     <a
-      href="dashboard"
+      href="https://pmb.uisb.ac.id/"
       aria-label="PMB - Penerimaan Mahasiswa Baru"
       className="group relative ml-auto hidden shrink-0 items-center justify-between gap-4 overflow-hidden rounded-full bg-[#FF5500] py-1.5 pl-5 pr-1.5 font-heading text-sm font-semibold text-white shadow-md motion-safe:transition-colors duration-500 ease-out hover:text-[#FF5500] md:inline-flex"
     >
@@ -359,6 +359,20 @@ function MobileMenu({
       className="absolute left-0 top-full mt-4 w-full overflow-hidden rounded-2xl border border-white/10 bg-white/95 p-6 shadow-2xl shadow-uisb-purple/20 backdrop-blur-xl md:hidden"
     >
       <div className="grid gap-y-1">
+        {/* PMB Button in Mobile Menu */}
+        <Link
+          href="https://pmb.uisb.ac.id/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative w-full inline-flex items-center justify-between gap-4 overflow-hidden rounded-full bg-[#FF5500] py-3 pl-5 pr-3 font-heading text-sm font-semibold text-white shadow-md motion-safe:transition-colors duration-500 ease-out hover:bg-[#FF5500]/90 hover:text-white active:scale-[0.98]"
+        >
+          <span className="relative z-10 flex items-center justify-center gap-2">
+            <span>PMB</span>
+            <FaArrowRight className="h-4 w-4" />
+          </span>
+          <span className="pointer-events-none absolute right-3 top-1/2 h-7 w-7 -translate-y-1/2 rounded-full bg-white/20 motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-out motion-safe:group-hover:scale-[10]" />
+        </Link>
+
         {navItems.map((item, i) => {
           if (!item.dropdownId) {
             return (
