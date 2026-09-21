@@ -52,6 +52,7 @@ const nextConfig: NextConfig = {
               "font-src 'self' https://fonts.gstatic.com https://cdn.21st.dev",
               "img-src 'self' data: https: blob:",
               "connect-src 'self' https://kpzfphmcjpovylxidxvz.supabase.co",
+              "frame-src 'self' https://www.google.com https://maps.google.com https://www.google.com/maps",
               "frame-ancestors 'self'",
               "base-uri 'self'",
               "form-action 'self'",
