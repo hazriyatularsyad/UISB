@@ -3,8 +3,11 @@ import Link from "next/link"
 import { FaArrowLeft } from "react-icons/fa"
 import { getFacilityBySlug, listFacilities } from "@/lib/data-store"
 import { FacilityIcon } from "@/lib/facility-icons"
-import InteractiveSelector from "@/components/ui/interactive-selector"
-import { DynamicFrameLayout, type Frame } from "@/components/ui/dynamic-frame-layout"
+import InteractiveSelector from "@/components/ui/facility"
+import {
+  DynamicFrameLayout,
+  type Frame,
+} from "@/components/ui/dynamic-frame-layout"
 import { Reveal } from "@/components/ui/reveal"
 
 const galleryImages = [
@@ -72,7 +75,11 @@ export default async function FacilityDetailPage({
         <Reveal direction="up" delay={0.15}>
           <div className="mb-2 flex items-center gap-3">
             <span className="inline-flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#444] bg-[rgba(32,32,32,0.85)]">
-              <FacilityIcon icon={facility.icon} size={22} className="text-white" />
+              <FacilityIcon
+                icon={facility.icon}
+                size={22}
+                className="text-white"
+              />
             </span>
             <span className="text-xs font-bold uppercase tracking-widest text-amber-500">
               Facility

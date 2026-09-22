@@ -1,5 +1,5 @@
 import { listFacilities } from "@/lib/data-store"
-import InteractiveSelector from "@/components/ui/interactive-selector"
+import InteractiveSelector from "@/components/ui/facility"
 
 export default async function FacilityIndexPage() {
   const facilities = await listFacilities()

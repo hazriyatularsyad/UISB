@@ -26,8 +26,11 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: LayoutProps<"/">) {
   const programs = await listPrograms()
   return (
-    <html lang="en" className={`${montserrat.variable} ${roboto.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col font-body">
+    <html
+      lang="en"
+      className={`${montserrat.variable} ${roboto.variable} h-full overflow-x-clip antialiased`}
+    >
+      <body className="flex min-h-full flex-col overflow-x-clip font-body">
         <LayoutShell programs={programs}>{children}</LayoutShell>
       </body>
     </html>

@@ -44,12 +44,15 @@ export default function WelcomePopup({ data }: { data: PopupItem[] }) {
     }
     document.addEventListener("keydown", onKeyDown)
 
-    const previousOverflow = document.body.style.overflow
+    const prevBody = document.body.style.overflow
+    const prevHtml = document.documentElement.style.overflow
     document.body.style.overflow = "hidden"
+    document.documentElement.style.overflow = "hidden"
 
     return () => {
       document.removeEventListener("keydown", onKeyDown)
-      document.body.style.overflow = previousOverflow
+      document.body.style.overflow = prevBody
+      document.documentElement.style.overflow = prevHtml
     }
   }, [isOpen])
 
@@ -107,7 +110,7 @@ export default function WelcomePopup({ data }: { data: PopupItem[] }) {
                 type="button"
                 aria-label="Tutup"
                 onClick={close}
-                className="absolute right-2 top-2 z-10 inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/95 text-slate-600 shadow-sm ring-1 ring-slate-200 backdrop-blur transition-colors hover:bg-white hover:text-slate-900"
+                className="absolute right-2 top-2 z-30 inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/95 text-slate-600 shadow-sm ring-1 ring-slate-200 backdrop-blur transition-colors hover:bg-white hover:text-slate-900"
               >
                 <svg
                   viewBox="0 0 24 24"

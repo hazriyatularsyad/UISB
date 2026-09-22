@@ -1,9 +1,11 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { motion, useReducedMotion } from "motion/react"
+import { motion, AnimatePresence, useReducedMotion } from "motion/react"
+import { FaPlay, FaXmark } from "react-icons/fa6"
 import type { VideoItem } from "@/lib/data-store"
-import { Reveal, RevealItem } from "@/components/ui/reveal"
+import { Reveal } from "@/components/ui/reveal"
+import { cn } from "@/lib/utils"
 
 function extractYoutubeId(urlOrId: string): string {
   const t = urlOrId.trim()
@@ -35,9 +37,7 @@ export default function VideoSection({ items }: { items: VideoItem[] }) {
   if (items.length === 0) {
     return (
       <section className="bg-white py-16 px-4 sm:px-6 lg:px-8 md:w-[150vh] md:mx-auto font-sans overflow-hidden">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-extrabold text-[#0B1E48]">Videos</h2>
-        </div>
+        <VideoHeader />
         <p className="text-center text-sm text-slate-500">No videos yet.</p>
       </section>
     )
@@ -50,76 +50,28 @@ export default function VideoSection({ items }: { items: VideoItem[] }) {
 
   return (
     <section className="bg-white py-16 px-4 sm:px-6 lg:px-8 md:w-[150vh] md:mx-auto font-sans overflow-hidden">
-      <Reveal direction="up" className=" mb-12">
-        <h2 className="text-3xl font-extrabold text-[#0B1E48]">Videos</h2>
-        <div className=" h-px w-10 bg-amber-500 mt-2" />
-      </Reveal>
+      <VideoHeader />
 
-      <div className="relative flex items-center justify-center gap-2 md:gap-6 min-h-[320px] md:min-h-[420px] [perspective:1200px]">
-        <motion.div
-          key={`left-${left.id}`}
-          initial={reduce ? false : { opacity: 0, x: -40, rotateY: 30 }}
-          animate={{ opacity: 0.92, x: 0, rotateY: 22 }}
-          transition={{ type: "spring", stiffness: 120, damping: 20, mass: 0.8 }}
-          whileHover={reduce ? undefined : { rotateY: 12, scale: 1.02, transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] } }}
-          className="hidden md:block w-1/3 max-w-[340px] aspect-[4/3] rounded-xl overflow-hidden border-4 border-black shadow-2xl will-change-transform cursor-pointer"
-          style={{ transformStyle: "preserve-3d" }}
+      <div className="relative flex items-center justify-center gap-2 md:gap-4 min-h-[320px] md:min-h-[440px] [perspective:1400px]">
+        <CoverCard
+          item={left}
+          rotateY={18}
+          size="side"
           onClick={() => setSelectedVideo(extractYoutubeId(left.youtube_id))}
-        >
-          <div className="relative w-full h-full bg-slate-900 group">
-            <img src={left.thumbnail} alt={left.title} className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-              <div className="w-12 h-12 rounded-full border-2 border-white/80 flex items-center justify-center bg-black/40 backdrop-blur-sm group-hover:scale-110 transition-transform duration-300">
-                <svg className="w-5 h-5 text-white fill-current ml-0.5" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div
-          key={`center-${center.id}`}
-          initial={reduce ? false : { opacity: 0, scale: 0.94, y: 12 }}
-          animate={{ opacity: 1, scale: 1.04, y: 0 }}
-          transition={{ type: "spring", stiffness: 140, damping: 22, mass: 0.7 }}
-          whileHover={reduce ? undefined : { scale: 1.07, transition: { duration: 0.4 } }}
-          className="w-full md:w-5/12 max-w-[460px] aspect-[4/3] rounded-2xl overflow-hidden border-4 border-black shadow-2xl z-20 will-change-transform cursor-pointer"
+        />
+        <CoverCard
+          item={center}
+          rotateY={0}
+          size="center"
+          label
           onClick={() => setSelectedVideo(extractYoutubeId(center.youtube_id))}
-        >
-          <div className="relative w-full h-full bg-slate-900 group">
-            <img src={center.thumbnail} alt={center.title} className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-black/15 flex items-center justify-center">
-              <div className="w-16 h-16 rounded-full border-2 border-white/90 flex items-center justify-center bg-black/50 backdrop-blur-sm group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                <svg className="w-7 h-7 text-white fill-current ml-1" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div
-          key={`right-${right.id}`}
-          initial={reduce ? false : { opacity: 0, x: 40, rotateY: -30 }}
-          animate={{ opacity: 0.92, x: 0, rotateY: -22 }}
-          transition={{ type: "spring", stiffness: 120, damping: 20, mass: 0.8 }}
-          whileHover={reduce ? undefined : { rotateY: -12, scale: 1.02, transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] } }}
-          className="hidden md:block w-1/3 max-w-[340px] aspect-[4/3] rounded-xl overflow-hidden border-4 border-black shadow-2xl will-change-transform cursor-pointer"
-          style={{ transformStyle: "preserve-3d" }}
+        />
+        <CoverCard
+          item={right}
+          rotateY={-18}
+          size="side"
           onClick={() => setSelectedVideo(extractYoutubeId(right.youtube_id))}
-        >
-          <div className="relative w-full h-full bg-slate-900 group">
-            <img src={right.thumbnail} alt={right.title} className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-              <div className="w-12 h-12 rounded-full border-2 border-white/80 flex items-center justify-center bg-black/40 backdrop-blur-sm group-hover:scale-110 transition-transform duration-300">
-                <svg className="w-5 h-5 text-white fill-current ml-0.5" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+        />
       </div>
 
       <div className="flex justify-center items-center gap-2 mt-8">
@@ -127,38 +79,129 @@ export default function VideoSection({ items }: { items: VideoItem[] }) {
           <button
             key={i}
             onClick={() => setActive(i)}
-            className={`h-2 rounded-full transition-all duration-500 ease-out ${
-              i === active ? "w-6 bg-slate-800" : "w-2 bg-slate-300 hover:bg-slate-400"
-            }`}
+            className={cn(
+              "h-2 rounded-full transition-all duration-500 ease-out",
+              i === active ? "w-6 bg-uisb-purple" : "w-2 bg-slate-300 hover:bg-slate-400",
+            )}
             aria-label={`Go to slide ${i + 1}`}
           />
         ))}
       </div>
 
-      {selectedVideo && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-          <div className="relative w-full max-w-4xl bg-black rounded-2xl overflow-hidden shadow-2xl border border-slate-800">
-            <button
-              onClick={() => setSelectedVideo(null)}
-              className="absolute top-3 right-3 text-white/80 hover:text-white bg-black/50 p-2 rounded-full z-10 transition-colors"
-              aria-label="Close Modal"
+      <AnimatePresence>
+        {selectedVideo && (
+          <motion.div
+            initial={reduce ? undefined : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={reduce ? undefined : { opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+            onClick={() => setSelectedVideo(null)}
+          >
+            <motion.div
+              initial={reduce ? undefined : { scale: 0.95, y: 12 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={reduce ? undefined : { scale: 0.96, y: 8 }}
+              transition={{ type: "spring", stiffness: 260, damping: 24 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-4xl bg-black rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-            <div className="relative aspect-video w-full">
-              <iframe
-                src={`https://www.youtube.com/embed/${selectedVideo}?autoplay=1`}
-                title="YouTube Video Player"
-                className="w-full h-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
-          </div>
+              <button
+                onClick={() => setSelectedVideo(null)}
+                className="absolute top-3 right-3 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-black/60 text-white/90 transition-colors hover:bg-black/80 hover:text-white"
+                aria-label="Close Modal"
+              >
+                <FaXmark className="h-4 w-4" aria-hidden />
+              </button>
+              <div className="relative aspect-video w-full">
+                <iframe
+                  src={`https://www.youtube.com/embed/${selectedVideo}?autoplay=1`}
+                  title="YouTube Video Player"
+                  className="w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </section>
+  )
+}
+
+function VideoHeader() {
+  return (
+    <Reveal direction="up" className="mb-12">
+      <span className="block text-xs font-bold uppercase tracking-[0.18em] text-uisb-purple mb-2">
+        Media
+      </span>
+      <h2 className="font-heading text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
+        Video Kegiatan UISB
+      </h2>
+      <div className="mt-4 h-[2px] w-8 bg-amber-500" />
+    </Reveal>
+  )
+}
+
+function CoverCard({
+  item,
+  rotateY,
+  size,
+  label,
+  onClick,
+}: {
+  item: VideoItem
+  rotateY: number
+  size: "center" | "side"
+  label?: boolean
+  onClick: () => void
+}) {
+  const reduce = useReducedMotion()
+  const isCenter = size === "center"
+
+  return (
+    <motion.button
+      type="button"
+      onClick={onClick}
+      initial={reduce ? false : { opacity: 0, y: 16, scale: isCenter ? 0.96 : 0.9 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ type: "spring", stiffness: 160, damping: 20, mass: 0.8 }}
+      whileHover={reduce ? undefined : { rotateY: 0, scale: 1.03 }}
+      style={{
+        transformStyle: "preserve-3d",
+        transform: `rotateY(${isCenter ? 0 : rotateY}deg)`,
+      }}
+      className={cn(
+        "group relative shrink-0 overflow-hidden rounded-4xl bg-slate-900 shadow-xl will-change-transform",
+        "ring-1 ring-black/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-uisb-purple",
+        isCenter
+          ? "z-20 w-full max-w-[460px] aspect-[4/3] md:w-5/12"
+          : "hidden w-1/3 max-w-[300px] aspect-[4/3] md:block",
+      )}
+    >
+      <img
+        src={item.thumbnail}
+        alt={item.title}
+        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+
+      <span
+        className={cn(
+          "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center rounded-full bg-white text-uisb-purple shadow-lg transition-transform duration-300 group-hover:scale-110",
+          isCenter ? "h-16 w-16" : "h-11 w-11",
+        )}
+      >
+        <FaPlay className={cn(isCenter ? "ml-1 h-6 w-6" : "ml-0.5 h-4 w-4")} aria-hidden />
+      </span>
+
+      {label && isCenter && (
+        <div className="absolute inset-x-0 bottom-0 p-5 text-left">
+          <p className="line-clamp-1 text-base font-semibold text-white drop-shadow-sm">
+            {item.title}
+          </p>
         </div>
       )}
-    </section>
+    </motion.button>
   )
 }

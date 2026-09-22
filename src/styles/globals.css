@@ -35,8 +35,11 @@
   --color-destructive-foreground: #ffffff;
 }
 
+html,
 body {
   margin: 0;
+  max-width: 100%;
+  overflow-x: hidden;
   font-family: var(--font-body);
 }
 

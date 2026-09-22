@@ -4,13 +4,8 @@ import { Carousel, TestimonialCard, type iTestimonial } from "@/components/ui/pe
 
 export default function PeopleSayClient({ items }: { items: iTestimonial[] }) {
   const bgSay = "/images/bg-card.jpeg"
-  const cards = items.map((t, index) => (
-    <TestimonialCard
-      key={index}
-      testimonial={t}
-      index={index}
-      backgroundImage={bgSay}
-    />
+  const cards = items.map((t) => (
+    <TestimonialCard key={t.name} testimonial={t} backgroundImage={bgSay} />
   ))
 
   return <Carousel items={cards} />

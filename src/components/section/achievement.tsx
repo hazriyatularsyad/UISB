@@ -2,6 +2,7 @@ import { listAchievements } from "@/lib/data-store"
 import AchievementCards from "./achievement-cards"
 import { Reveal } from "@/components/ui/reveal"
 
+
 export default async function Achievement() {
   const achievements = await listAchievements()
 
@@ -25,7 +26,7 @@ export default async function Achievement() {
           </div>
         </Reveal>
 
-        <Reveal direction="up" delay={0.15}>
+        <Reveal direction="none" delay={0.15} once>
           <AchievementCards items={achievements} />
         </Reveal>
       </div>

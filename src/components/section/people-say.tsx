@@ -7,7 +7,7 @@ export default async function PeopleSay() {
 
   if (items.length === 0) {
     return (
-      <section className="py-20 px-4 sm:px-6 lg:px-8 font-body">
+      <section className="max-w-full overflow-x-hidden py-20 px-4 sm:px-6 lg:px-8 font-body">
         <div className="md:w-[150vh] md:mx-auto">
           <Reveal direction="up">
             <span className="block text-xs font-bold uppercase tracking-[0.18em] text-amber-600 mb-3">
@@ -30,7 +30,7 @@ export default async function PeopleSay() {
   }
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 font-body">
+    <section className="max-w-full overflow-x-hidden py-20 px-4 sm:px-6 lg:px-8 font-body">
       <div className="md:w-[150vh] md:mx-auto">
         <Reveal direction="up">
           <span className="block text-xs font-bold uppercase tracking-[0.18em] text-amber-600 mb-3">
@@ -45,7 +45,7 @@ export default async function PeopleSay() {
           </p>
         </Reveal>
 
-        <Reveal direction="up" delay={0.15}>
+        <Reveal direction="none" once>
           <PeopleSayClient
             items={items.map((t) => ({
               name: t.name,
