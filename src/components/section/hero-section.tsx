@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from "react"
+import Image from "next/image"
 import { motion, AnimatePresence, useReducedMotion } from "motion/react"
 import { cn } from "@/lib/utils"
 import { heroSlides } from "@/data/site"
@@ -13,7 +14,7 @@ export interface HeroSectionProps {
   intervalMs?: number
 }
 
-const FALLBACK_IMAGE = "/images/Hero1.png"
+const FALLBACK_IMAGE = "/images/hero1.webp"
 
 /**
  * Hero full-bleed dengan auto-slide gambar.
@@ -23,8 +24,8 @@ const FALLBACK_IMAGE = "/images/Hero1.png"
  * - reduced motion: tampilkan slide pertama saja (statis)
  */
 export const HeroSection = ({
-  imageSrc = "/images/Hero1.png",
-  imageSrcMobile = "/images/Hero-Mobile.png",
+  imageSrc = "/images/hero1.webp",
+  imageSrcMobile = "/images/hero-mobile.webp",
   imageAlt = "Hero background",
   className,
   slides,
@@ -141,19 +142,24 @@ export const HeroSection = ({
             className="absolute inset-0"
           >
             {/* Gambar desktop */}
-            <img
+            <Image
               src={currentDesktop.image}
               alt={currentDesktop.title || imageAlt}
-              className="hidden h-full w-full object-cover md:block"
+              fill
+              sizes="100vw"
               loading="eager"
+              className="hidden object-cover md:block"
               onError={onImgError}
             />
-            {/* Gambar mobile (variant khusus) */}
-            <img
+            {/* Gambar mobile (variant khusus) — LCP */}
+            <Image
               src={currentMobile.image}
               alt={currentMobile.title || imageAlt}
-              className="block h-full w-full object-cover object-[50%_35%] md:hidden"
-              loading="eager"
+              fill
+              sizes="100vw"
+              priority
+              fetchPriority="high"
+              className="block object-cover object-[50%_35%] md:hidden"
               onError={onImgError}
             />
           </motion.div>

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Image from "next/image"
 import { motion, AnimatePresence, useReducedMotion } from "motion/react"
 import { FaPlay, FaXmark } from "react-icons/fa6"
 import type { VideoItem } from "@/lib/data-store"
@@ -179,10 +180,12 @@ function CoverCard({
           : "hidden w-1/3 max-w-[300px] aspect-[4/3] md:block",
       )}
     >
-      <img
+      <Image
         src={item.thumbnail}
         alt={item.title}
-        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+        fill
+        sizes="(max-width: 768px) 90vw, 460px"
+        className="object-cover transition-transform duration-700 group-hover:scale-105"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 

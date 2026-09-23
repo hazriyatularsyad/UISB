@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import { motion, useReducedMotion } from "motion/react"
 import { cn } from "@/lib/utils"
 
@@ -81,11 +82,12 @@ export default function DosenAccordion({ items }: { items: DosenItem[] }) {
                 isActive ? "flex-[5]" : "flex-[0.6] hover:flex-[0.9]",
               )}
             >
-              <img
+              <Image
                 src={item.image}
                 alt={item.name}
-                className="w-full h-full object-cover object-center"
-                loading="lazy"
+                fill
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                className="object-cover object-center"
               />
               <div
                 className={cn(

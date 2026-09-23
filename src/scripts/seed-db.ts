@@ -12,7 +12,7 @@ const newsSeed = [
     description:
       "The varsity basketball team secured a thrilling victory in the regional finals after an intense match.",
     image:
-      "https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop",
     link: "#",
   },
   {
@@ -21,7 +21,7 @@ const newsSeed = [
     description:
       "The annual cultural festival featured performances, food stalls, and exhibitions from various student groups.",
     image:
-      "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop",
     link: "#",
   },
   {
@@ -30,7 +30,7 @@ const newsSeed = [
     description:
       "Members of the environmental club organized a successful clean-up campaign around the school.",
     image:
-      "https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?auto=format&fit=crop",
     link: "#",
   },
   {
@@ -39,7 +39,7 @@ const newsSeed = [
     description:
       "The school inaugurated a modern library wing equipped with digital resources and collaborative spaces.",
     image:
-      "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop",
     link: "#",
   },
 ]
@@ -103,7 +103,7 @@ const dosenSeed = [
     description:
       "Lecturer specializing in enterprise information systems, data architecture, and digital business strategy. Active researcher in the field of information systems governance.",
     image:
-      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop",
   },
   {
     name: "Andi Pratama, M.T",
@@ -112,7 +112,7 @@ const dosenSeed = [
     description:
       "Lecturer focused on software engineering, cloud computing, and scalable distributed systems. Mentor for student-led software projects.",
     image:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop",
   },
   {
     name: "Dr. Sari Wahyuni, S.H., M.H.",
@@ -121,7 +121,7 @@ const dosenSeed = [
     description:
       "Lecturer in commercial law, business contracts, and corporate governance. Provides legal mentorship for business simulation programs.",
     image:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop",
   },
   {
     name: "Budi Santosa, M.Psi",
@@ -130,7 +130,7 @@ const dosenSeed = [
     description:
       "Lecturer in organizational psychology, leadership, and consumer behavior. Supports student development through coaching and mentoring programs.",
     image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop",
   },
   {
     name: "Dr. Lina Marlina, M.Kes",
@@ -139,7 +139,7 @@ const dosenSeed = [
     description:
       "Lecturer in public health, epidemiology, and health policy. Guides students in community health research and field studies.",
     image:
-      "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop",
   },
 ]
 
@@ -150,7 +150,7 @@ const facilitiesSeed = [
     description:
       "Perpustakaan kampus dengan koleksi lengkap buku teks, jurnal ilmiah, dan sumber digital. Tersedia ruang baca individual, area diskusi, serta akses e-journal nasional dan internasional.",
     image:
-      "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop",
     icon: "FaBook",
   },
   {
@@ -159,7 +159,7 @@ const facilitiesSeed = [
     description:
       "Laboratorium komputer dengan perangkat mutakhir untuk praktikum pemrograman, analisis data, dan simulasi bisnis. Dilengkapi software terbaru dan akses internet kampus 24 jam.",
     image:
-      "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop",
     icon: "FaDesktop",
   },
   {
@@ -168,7 +168,7 @@ const facilitiesSeed = [
     description:
       "Kompleks olahraga kampus mencakup lapangan basket, futsal, dan area outdoor untuk kegiatan mahasiswa. Menjadi pusat kegiatan unit kegiatan mahasiswa olahraga dan kompetisi antar fakultas.",
     image:
-      "https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop",
     icon: "FaFutbol",
   },
   {
@@ -177,7 +177,7 @@ const facilitiesSeed = [
     description:
       "Auditorium utama berkapasitas 800 kursi dengan sistem audio dan pencahayaan profesional. Digunakan untuk kegiatan akademik, seminar nasional, wisuda, dan acara kemahasiswaan.",
     image:
-      "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop",
     icon: "FaUsers",
   },
   {
@@ -186,7 +186,7 @@ const facilitiesSeed = [
     description:
       "Ruang santai mahasiswa dengan Wi-Fi kampus gratis, colokan listrik di setiap meja, dan area kerja kelompok. Tempat ideal untuk belajar informal dan bersosialisasi antar program studi.",
     image:
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop",
     icon: "FaWifi",
   },
 ]
@@ -195,35 +195,35 @@ const informationSeed = [
   {
     title: "FRONTEND DEV",
     image:
-      "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop",
     description:
       "Pengembangan antarmuka pengguna menggunakan React, Next.js, dan Tailwind CSS. Fokus pada performa, aksesibilitas, dan pengalaman pengguna yang mulus.",
   },
   {
     title: "BACKEND DEV",
     image:
-      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop",
     description:
       "Pengembangan server dan API dengan Node.js, PostgreSQL, dan serverless architecture. Menyediakan infrastruktur yang stabil dan scalable.",
   },
   {
     title: "UI UX DESIGN",
     image:
-      "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop",
     description:
       "Desain antarmuka dan pengalaman pengguna yang menarik. Proses desain mulai dari riset pengguna hingga prototipe interaktif.",
   },
   {
     title: "VIDEO EDITING",
     image:
-      "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop",
     description:
       "Editing video profesional dengan Adobe Premiere Pro, After Effects, dan DaVinci Resolve. Membuat konten yang menarik untuk media sosial dan iklan.",
   },
   {
     title: "SEO OPTIMIZATION",
     image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop",
     description:
       "Optimasi mesin pencari untuk meningkatkan visibilitas website. Termasuk analisis kata kunci, struktur URL, dan kecepatan halaman.",
   },
@@ -235,7 +235,7 @@ const achievementsSeed = [
     description:
       "Learning software engineering, data science, and emerging technologies through hands-on projects and industry mentorship.",
     image:
-      "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop",
     link_url: "/academics",
   },
   {
@@ -243,7 +243,7 @@ const achievementsSeed = [
     description:
       "Strategic partnerships with 50+ international universities for exchange programs, research collaborations, and global career paths.",
     image:
-      "https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop",
     link_url: "/facility",
   },
   {
@@ -251,7 +251,7 @@ const achievementsSeed = [
     description:
       "Over 10,000 students and 500+ lecturers building the future together through innovation and shared knowledge.",
     image:
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop",
     link_url: "/information",
   },
 ]
@@ -259,22 +259,22 @@ const achievementsSeed = [
 const heroSlidesSeed = [
   {
     title: "Hero Campus 1",
-    image: "/images/Hero1.png",
+    image: "/images/hero1.webp",
     device_type: "desktop",
   },
   {
     title: "Hero Campus 2",
-    image: "/images/Hero2.png",
+    image: "/images/hero2.webp",
     device_type: "desktop",
   },
   {
     title: "Hero Campus 3",
-    image: "/images/Hero3.png",
+    image: "/images/hero3.webp",
     device_type: "desktop",
   },
   {
     title: "Hero Campus Mobile",
-    image: "/images/Hero-Mobile.png",
+    image: "/images/hero-mobile.webp",
     device_type: "mobile",
   },
 ]

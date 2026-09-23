@@ -7,19 +7,19 @@ import { motion } from "motion/react"
 import {
   FaBars,
   FaBuilding,
-  FaCogs,
+  FaGear,
   FaComments,
-  FaExternalLinkAlt,
+  FaUpRightFromSquare,
   FaGraduationCap,
   FaImages,
-  FaMagic,
+  FaWandMagicSparkles,
   FaNewspaper,
-  FaSignOutAlt,
-  FaTimes,
+  FaRightFromBracket,
+  FaXmark,
   FaTrophy,
   FaUsers,
   FaVideo,
-} from "react-icons/fa"
+} from "react-icons/fa6"
 import { siteData } from "@/data/site"
 import { logoutAction } from "@/app/login/actions"
 
@@ -37,8 +37,8 @@ const links: NavItem[] = [
   { href: "/dashboard/achievements", label: "Achievements", icon: FaTrophy },
   { href: "/dashboard/programs", label: "Programs", icon: FaGraduationCap },
   { href: "/dashboard/facilities", label: "Facilities", icon: FaBuilding },
-  { href: "/dashboard/information", label: "Information", icon: FaCogs },
-  { href: "/dashboard/popups", label: "Popups", icon: FaMagic },
+  { href: "/dashboard/information", label: "Information", icon: FaGear },
+  { href: "/dashboard/popups", label: "Popups", icon: FaWandMagicSparkles },
   { href: "/dashboard/news", label: "News", icon: FaNewspaper },
   { href: "/dashboard/dosen", label: "Dosen", icon: FaUsers },
   { href: "/dashboard/testimonials", label: "Testimonials", icon: FaComments },
@@ -118,7 +118,7 @@ export default function DashboardSidebar() {
             onClick={() => setOpen(false)}
             className="inline-flex h-8 w-8 items-center justify-center rounded-md text-slate-500 transition-colors hover:bg-slate-200 hover:text-slate-900 md:hidden"
           >
-            <FaTimes className="h-4 w-4" aria-hidden />
+            <FaXmark className="h-4 w-4" aria-hidden />
           </button>
         </div>
         <nav className="flex-1 px-2.5 py-4">
@@ -160,7 +160,7 @@ export default function DashboardSidebar() {
         </nav>
         <div className="border-t border-slate-200 px-4 py-7">
           <div className="mb-1 flex items-center gap-1.5">
-            <FaExternalLinkAlt className="h-3.5 w-3.5" aria-hidden />
+            <FaUpRightFromSquare className="h-3.5 w-3.5" aria-hidden />
             <Link
               href="/"
               onClick={() => setOpen(false)}
@@ -174,7 +174,7 @@ export default function DashboardSidebar() {
               type="submit"
               className="mt-1 flex w-full items-center gap-1.5 rounded-md px-0 py-1 text-[15px] font-medium text-slate-500 transition-colors hover:text-red-600"
             >
-              <FaSignOutAlt className="h-3.5 w-3.5" aria-hidden />
+              <FaRightFromBracket className="h-3.5 w-3.5" aria-hidden />
               Logout
             </button>
           </form>

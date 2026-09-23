@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation"
 import Link from "next/link"
-import { FaArrowLeft } from "react-icons/fa"
+import Image from "next/image"
+import { FaArrowLeft } from "react-icons/fa6"
 import { getFacilityBySlug, listFacilities } from "@/lib/data-store"
 import { FacilityIcon } from "@/lib/facility-icons"
 import InteractiveSelector from "@/components/ui/facility"
@@ -11,15 +12,15 @@ import {
 import { Reveal } from "@/components/ui/reveal"
 
 const galleryImages = [
-  "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?auto=format&fit=crop",
 ]
 
 const galleryFrames: Frame[] = galleryImages.map((image, i) => ({
@@ -64,11 +65,13 @@ export default async function FacilityDetailPage({
           Back to Facilities
         </Link>
 
-        <Reveal direction="up" className="mb-8 overflow-hidden rounded-lg">
-          <img
+        <Reveal direction="up" className="relative mb-8 h-64 overflow-hidden rounded-lg md:h-130">
+          <Image
             src={facility.image}
             alt={facility.title}
-            className="h-64 w-full object-cover md:h-130"
+            fill
+            sizes="(max-width: 768px) 100vw, 1200px"
+            className="object-cover"
           />
         </Reveal>
 

@@ -21,6 +21,7 @@ const roboto = Roboto({
 export const metadata: Metadata = {
   title: "UISB",
   description: "Toward Campus Business Digital",
+  icons: { icon: "/images/favicon.png" },
 }
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {

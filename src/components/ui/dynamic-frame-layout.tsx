@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import { motion } from "motion/react"
 import { cn } from "@/lib/utils"
 
@@ -35,11 +36,12 @@ function FrameComponent({
       }}
     >
       <div className="relative h-full w-full overflow-hidden">
-        <img
+        <Image
           src={image}
           alt=""
-          loading="lazy"
-          className="h-full w-full scale-105 object-cover transition-transform duration-700 ease-out will-change-transform"
+          fill
+          sizes="33vw"
+          className="scale-105 object-cover transition-transform duration-700 ease-out will-change-transform"
           style={{ transform: isHovered ? "scale(1.08)" : "scale(1.05)" }}
         />
         <div

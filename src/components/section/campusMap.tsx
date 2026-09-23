@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { FaMapMarkerAlt } from "react-icons/fa"
+import { FaLocationDot } from "react-icons/fa6"
 import { maps } from "@/data/site"
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal"
 
@@ -26,7 +26,7 @@ export default function CampusMap() {
                     : "border-slate-200 bg-white hover:border-slate-300"
                 }`}
               >
-                <FaMapMarkerAlt
+                <FaLocationDot
                   className={`mt-0.5 h-5 w-5 shrink-0 ${
                     active.id === loc.id ? "text-amber-500" : "text-slate-400"
                   }`}

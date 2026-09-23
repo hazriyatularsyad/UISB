@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { FaArrowLeft } from "react-icons/fa"
+import { FaArrowLeft } from "react-icons/fa6"
 import { Reveal } from "@/components/ui/reveal"
 import { CalendlyCarousel, type CarouselItem } from "@/components/ui/founder-ui"
 
@@ -14,9 +14,9 @@ const FOUNDER_DATA: CarouselItem[] = [
     author: "Prof. Dr. H. Syamsul Bahri, M.A.",
     role: "Ketua Dewan Pembina Yayasan UISB",
     defaultImage:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop",
     selectedImage:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop",
     alt: "Ketua Dewan Pembina Yayasan UISB",
   },
   {
@@ -27,9 +27,9 @@ const FOUNDER_DATA: CarouselItem[] = [
     author: "Dr. H. Ahmad Fauzi, S.E., M.M.",
     role: "Anggota Dewan Pembina / Tokoh Pendidikan",
     defaultImage:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop",
     selectedImage:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop",
     alt: "Anggota Dewan Pembina UISB",
   },
   {
@@ -40,9 +40,9 @@ const FOUNDER_DATA: CarouselItem[] = [
     author: "Hj. Nurhayati Subakat, Apt.",
     role: "Dewan Kehormatan & Penasihat Kewirausahaan",
     defaultImage:
-      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop",
     selectedImage:
-      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop",
     alt: "Dewan Kehormatan UISB",
   },
   {
@@ -53,9 +53,9 @@ const FOUNDER_DATA: CarouselItem[] = [
     author: "Ir. H. Muhammad Ridwan, M.Sc.",
     role: "Dewan Pembina Bidang Pengembangan Global",
     defaultImage:
-      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop",
     selectedImage:
-      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop",
     alt: "Dewan Pembina Bidang Pengembangan Global",
   },
 ]

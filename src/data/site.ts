@@ -10,9 +10,9 @@ export const siteData = {
     whatsappDisplay: "+62 811-6655-515",
   },
   hero: {
-    imageSrc: "/images/Hero1.png",
+    imageSrc: "/images/hero1.webp",
     imageAlt: "Hero background",
-    logoSrc: "/images/uisbLogo.png",
+    logoSrc: "/images/uisb-logo@2x.png",
     socialLinks: [
       { name: "Instagram", href: "#", icon: "FaInstagram" },
       { name: "Facebook", href: "#", icon: "FaFacebook" },
@@ -35,7 +35,7 @@ export const siteData = {
         title: "Sistem Informasi",
         label: "Information Systems",
         image:
-          "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop",
         description:
           "Explore the richness of human culture, history, literature, and philosophy. Our Arts & Humanities program develops critical thinking, creativity, and communication skills through deep engagement with texts, ideas, and artistic expression.",
         shortDescription:
@@ -46,7 +46,7 @@ export const siteData = {
         title: "Teknik Informatika",
         label: "Informatics Engineering",
         image:
-          "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop",
         description:
           "Build the skills to lead, innovate, and compete in global markets. The Business program covers management, finance, marketing, and entrepreneurship with real-world case studies and hands-on projects.",
         shortDescription:
@@ -57,7 +57,7 @@ export const siteData = {
         title: "Hukum",
         label: "Law",
         image:
-          "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop",
         description:
           "Design and build solutions for real-world problems. Our Engineering program combines theory with practice across civil, mechanical, electrical, and software disciplines using modern labs and tools.",
         shortDescription:
@@ -68,7 +68,7 @@ export const siteData = {
         title: "Psikology",
         label: "Psychology",
         image:
-          "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop",
         description:
           "Investigate the natural world through rigorous research and experimentation. The Sciences program spans biology, chemistry, physics, and mathematics with access to advanced laboratory facilities.",
         shortDescription:
@@ -79,7 +79,7 @@ export const siteData = {
         title: "Kesehatan Masyarakat",
         label: "Public Health",
         image:
-          "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop",
         description:
           "Shape the future by learning how to teach effectively. The Education program prepares you with pedagogy, curriculum design, and classroom management skills for diverse learning environments.",
         shortDescription:
@@ -90,9 +90,9 @@ export const siteData = {
 }
 
 export const heroSlides = [
-  { imageSrc: "/images/Hero1.png", imageSrcMobile: "/images/Hero-Mobile.png", alt: "Hero 1" },
-  { imageSrc: "/images/Hero2.png", imageSrcMobile: "/images/Hero-Mobile.png", alt: "Hero 2" },
-  { imageSrc: "/images/Hero3.png", imageSrcMobile: "/images/Hero-Mobile.png", alt: "Hero 3" },
+  { imageSrc: "/images/hero1.webp", imageSrcMobile: "/images/hero-mobile.webp", alt: "Hero 1" },
+  { imageSrc: "/images/hero2.webp", imageSrcMobile: "/images/hero-mobile.webp", alt: "Hero 2" },
+  { imageSrc: "/images/hero3.webp", imageSrcMobile: "/images/hero-mobile.webp", alt: "Hero 3" },
 ] as const
 
 export const maps = [

@@ -1,8 +1,9 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import Image from "next/image"
 import { motion, AnimatePresence, useReducedMotion } from "motion/react"
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa"
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa6"
 import { cn } from "@/lib/utils"
 import type { AchievementItem } from "@/lib/data-store"
 
@@ -80,7 +81,7 @@ function MobileStack({
           className="absolute inset-0 translate-y-3 scale-[0.94] overflow-hidden rounded-2xl border border-slate-200 bg-white opacity-70 shadow-sm"
         >
           <div className="h-[290px] w-full overflow-hidden">
-            <img src={behind.image} alt="" className="h-full w-full object-cover" draggable={false} />
+            <Image src={behind.image} alt="" fill sizes="(max-width: 768px) 90vw, 400px" className="object-cover" draggable={false} />
           </div>
         </div>
 
@@ -109,7 +110,7 @@ function MobileStack({
             style={{ touchAction: "pan-y" }}
           >
             <div className="relative h-[290px] w-full overflow-hidden rounded-xl">
-              <img src={current.image} alt={current.title} draggable={false} className="h-full w-full object-cover" />
+              <Image src={current.image} alt={current.title} fill sizes="(max-width: 768px) 90vw, 400px" className="object-cover" draggable={false} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
             </div>
             <h3 className="mt-5 text-lg font-semibold leading-snug text-slate-900">{current.title}</h3>
@@ -207,7 +208,7 @@ function DesktopRow({
           <div key={item.id} data-card className="w-[calc(33.333%-1rem)] shrink-0">
             <div className="flex h-full flex-col overflow-hidden rounded-2xl border bg-white p-6 shadow-sm transition-all duration-300 hover:border-amber-500/60 hover:-translate-y-0.5">
               <div className="relative mb-4 h-80 w-full overflow-hidden rounded-xl">
-                <img src={item.image} alt={item.title} className="h-full w-full object-cover" />
+                <Image src={item.image} alt={item.title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
               </div>
               <h3 className="text-lg font-semibold leading-snug text-slate-800">{item.title}</h3>

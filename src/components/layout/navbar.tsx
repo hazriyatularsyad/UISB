@@ -1,8 +1,9 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import { motion, useScroll, useTransform, useReducedMotion } from "motion/react"
-import { FaArrowRight, FaChevronDown } from "react-icons/fa"
+import { FaArrowRight, FaChevronDown } from "react-icons/fa6"
 import Link from "next/link"
 import type { ProgramItem } from "@/lib/data-store"
 
@@ -37,7 +38,7 @@ const ABOUT_US_LINKS = [
 ]
 
 export default function Navbar({
-  logoSrc = "/images/uisbLogo.png",
+  logoSrc = "/images/uisb-logo@2x.png",
   logoText = "UISB",
   navItems = DEFAULT_NAV_ITEMS,
   programs = [],
@@ -123,7 +124,7 @@ function Logo({ logoSrc, logoText }: { logoSrc?: string; logoText?: string }) {
         className="inline-flex"
       >
         {logoSrc ? (
-          <img src={logoSrc} alt="Logo" className="h-8 w-auto md:h-10" />
+          <Image src={logoSrc} alt="Logo" width={145} height={64} className="h-8 w-auto md:h-10" />
         ) : (
           <span className="text-sm font-bold tracking-wider text-amber-500">
             {logoText}

@@ -1,4 +1,5 @@
-import { FaBookOpen, FaGlobe, FaLightbulb, FaPhoneAlt } from "react-icons/fa"
+import Image from "next/image"
+import { FaBookOpen, FaGlobe, FaLightbulb, FaPhone } from "react-icons/fa6"
 import { CountUp, Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal"
 
 export default function AboutUs() {
@@ -25,11 +26,13 @@ export default function AboutUs() {
       <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
         <Reveal direction="left" className="grid grid-cols-2 items-start gap-4 lg:col-span-6">
           <div className="space-y-4">
-            <div className="h-[320px] overflow-hidden rounded-[80px_80px_0_80px] shadow-sm">
-              <img
-                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80"
+            <div className="relative h-[320px] overflow-hidden rounded-[80px_80px_0_80px] shadow-sm">
+              <Image
+                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop"
                 alt="Woman reading book"
-                className="h-full w-full object-cover"
+                fill
+                sizes="(max-width: 1024px) 45vw, 25vw"
+                className="object-cover"
               />
             </div>
             <div className="flex items-center space-x-3 rounded-2xl bg-amber-500 p-4 text-white shadow-md">
@@ -43,18 +46,22 @@ export default function AboutUs() {
             </div>
           </div>
           <div className="space-y-4 pt-4">
-            <div className="h-[200px] overflow-hidden rounded-[80px_80px_0_80px] shadow-sm">
-              <img
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+            <div className="relative h-[200px] overflow-hidden rounded-[80px_80px_0_80px] shadow-sm">
+              <Image
+                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop"
                 alt="Students studying"
-                className="h-full w-full object-cover"
+                fill
+                sizes="(max-width: 1024px) 45vw, 25vw"
+                className="object-cover"
               />
             </div>
-            <div className="h-[260px] overflow-hidden rounded-[0_80px_80px_80px] shadow-sm">
-              <img
-                src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=600&q=80"
+            <div className="relative h-[260px] overflow-hidden rounded-[0_80px_80px_80px] shadow-sm">
+              <Image
+                src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop"
                 alt="Teacher helping student"
-                className="h-full w-full object-cover"
+                fill
+                sizes="(max-width: 1024px) 45vw, 25vw"
+                className="object-cover"
               />
             </div>
           </div>
@@ -118,7 +125,7 @@ export default function AboutUs() {
             </button> */}
             {/* <div className="flex items-center space-x-3">
               <div className="rounded-full bg-amber-500 p-3 text-white shadow-sm">
-                <FaPhoneAlt className="h-4 w-4" />
+                <FaPhone className="h-4 w-4" />
               </div>
               <div>
                 <span className="block text-xs font-medium text-gray-400">

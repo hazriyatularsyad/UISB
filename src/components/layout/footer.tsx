@@ -1,6 +1,7 @@
 "use client"
 
-import { FaGithub, FaTwitter, FaLinkedinIn, FaArrowRight } from "react-icons/fa"
+import Image from "next/image"
+import { FaGithub, FaTwitter, FaLinkedinIn, FaArrowRight } from "react-icons/fa6"
 import { siteData } from "@/data/site"
 
 const GitHubIcon = ({ size = 24, className = "" }: { size?: number; className?: string }) => (
@@ -21,7 +22,7 @@ export default function Footer() {
       <div className="container mx-auto grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
         <div className="space-y-4">
           <div className="flex items-center space-x-2">
-            <img src={siteData.hero.logoSrc} alt="Logo" className="h-10 w-auto" />
+            <Image src={siteData.hero.logoSrc} alt="Logo" width={145} height={64} className="h-10 w-auto" />
             <h3 className="text-3xl font-extrabold text-blue-600 dark:text-amber-400">
               UISB
             </h3>

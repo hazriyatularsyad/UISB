@@ -133,7 +133,7 @@ export default function PopupManager({ initial }: { initial: PopupItem[] }) {
           <div className="flex flex-col items-center gap-1.5">
             <p className="text-slate-500">No popups yet</p>
             <p className="text-[13px] text-slate-400">
-              Click “New popup” — upload Hero-Mobile.png + set event date.
+              Click “New popup” — upload hero-mobile.webp + set event date.
             </p>
           </div>
         }
@@ -273,7 +273,7 @@ function PopupForm({
           </span>
         </div>
         {/* <p className="mt-1 text-xs text-slate-500">
-          Hanya <strong>gambar wajib</strong> — field lain opsional. Kosongkan = tidak tampil di popup. Portrait 720×960, default <code>/images/Hero-Mobile.png</code>.
+          Hanya <strong>gambar wajib</strong> — field lain opsional. Kosongkan = tidak tampil di popup. Portrait 720×960, default <code>/images/hero-mobile.webp</code>.
         </p> */}
       </div>
       <form

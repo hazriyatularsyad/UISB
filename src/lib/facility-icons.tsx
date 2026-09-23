@@ -8,7 +8,7 @@ import {
   FaUtensils,
   FaWifi,
   FaBuilding,
-} from "react-icons/fa"
+} from "react-icons/fa6"
 import type { IconType } from "react-icons/lib"
 
 export const FACILITY_ICONS: Record<string, IconType> = {

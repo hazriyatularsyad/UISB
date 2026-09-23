@@ -151,7 +151,7 @@ export default function WelcomePopup({ data }: { data: PopupItem[] }) {
                           : undefined
                     }
                     date={eventDate}
-                    image={current.image || "/images/Hero-Mobile.png"}
+                    image={current.image || "/images/hero-mobile.webp"}
                     onJoin={
                       current.button_label?.trim() && current.button_href?.trim()
                         ? () => handleCta(current.button_href)

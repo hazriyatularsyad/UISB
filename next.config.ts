@@ -6,12 +6,25 @@ const nextConfig: NextConfig = {
     serverActions: {
       bodySizeLimit: "10mb",
     },
+    optimizePackageImports: ["react-icons", "motion", "lucide-react"],
   },
   images: {
     remotePatterns: [
       {
         protocol: "https",
         hostname: "cdn.21st.dev",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "plus.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "img.youtube.com",
       },
     ],
   },

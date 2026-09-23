@@ -1,8 +1,9 @@
 "use client"
 
 import { useState, useTransition } from "react"
+import Image from "next/image"
 import { useSearchParams } from "next/navigation"
-import { FaLock, FaUser } from "react-icons/fa"
+import { FaLock, FaUser } from "react-icons/fa6"
 import { loginAction } from "./actions"
 import LoadingBars from "./loading-bars"
 
@@ -36,9 +37,11 @@ export default function LoginForm() {
       <div className="relative w-full max-w-md">
         <div className="rounded-2xl border border-white/10 bg-white p-8 shadow-2xl shadow-uisb-purple/40 sm:p-10">
           <div className="mb-8 text-center">
-            <img
-              src="/images/uisbLogo.png"
+            <Image
+              src="/images/uisb-logo@2x.png"
               alt="UISB"
+              width={145}
+              height={64}
               className="mx-auto mb-4 h-12 w-auto"
             />
             <h1 className="font-heading text-2xl font-bold tracking-tight text-slate-900">

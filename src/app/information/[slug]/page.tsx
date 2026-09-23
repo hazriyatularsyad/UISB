@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation"
 import Link from "next/link"
-import { FaArrowLeft } from "react-icons/fa"
+import Image from "next/image"
+import { FaArrowLeft } from "react-icons/fa6"
 import { getInformationBySlug, listInformation } from "@/lib/data-store"
 import { Reveal } from "@/components/ui/reveal"
 
@@ -30,11 +31,13 @@ export default async function InformationDetailPage({
           Back to Information
         </Link>
 
-        <Reveal direction="up">
-          <img
+        <Reveal direction="up" className="relative mb-6 h-64 overflow-hidden rounded-lg md:h-130">
+          <Image
             src={item.image}
             alt={item.title}
-            className="mb-6 h-64 w-full rounded-lg object-cover md:h-130"
+            fill
+            sizes="(max-width: 768px) 100vw, 1200px"
+            className="object-cover"
           />
         </Reveal>
 

@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { FaWhatsapp } from "react-icons/fa"
+import { FaWhatsapp } from "react-icons/fa6"
 
 const WA_NUMBER = "628116655515"
 

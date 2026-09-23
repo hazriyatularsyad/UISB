@@ -1,5 +1,6 @@
 import Link from "next/link"
-import { FaArrowLeft } from "react-icons/fa"
+import Image from "next/image"
+import { FaArrowLeft } from "react-icons/fa6"
 import { Reveal } from "@/components/ui/reveal"
 
 export default function SambutanRektor() {
@@ -24,11 +25,13 @@ export default function SambutanRektor() {
           <div className="mb-8 h-1 w-12 rounded-full bg-amber-500" />
         </Reveal>
 
-        <Reveal direction="up" className="mb-10 overflow-hidden rounded-2xl border border-slate-200 shadow-lg">
-          <img
-            src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=1200&q=80"
+        <Reveal direction="up" className="relative mb-10 h-64 overflow-hidden rounded-2xl border border-slate-200 shadow-lg md:h-[450px]">
+          <Image
+            src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop"
             alt="Rektor UISB"
-            className="h-64 w-full object-cover md:h-[450px]"
+            fill
+            sizes="(max-width: 768px) 100vw, 1000px"
+            className="object-cover"
           />
         </Reveal>
 

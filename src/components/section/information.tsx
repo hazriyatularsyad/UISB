@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import type { InformationItem } from "@/lib/data-store"
 import { Reveal } from "@/components/ui/reveal"
@@ -64,10 +65,12 @@ export default function Information({
 
           <div className="flex w-full justify-center md:col-span-5">
             <div className="relative aspect-[4/3] w-full max-w-[560px] overflow-hidden rounded-md bg-zinc-200 shadow-lg md:h-[650px] md:aspect-auto">
-              <img
+              <Image
                 src={activeService.image}
                 alt={activeService.title}
-                className="absolute inset-0 h-full w-full object-cover transition-all duration-500 ease-in-out"
+                fill
+                sizes="(max-width: 768px) 100vw, 55vw"
+                className="object-cover transition-all duration-500 ease-in-out"
               />
             </div>
           </div>

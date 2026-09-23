@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { listNews, type NewsItem } from "@/lib/data-store"
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal"
 
@@ -19,10 +20,12 @@ function NewsCard({
     >
       {featured ? (
         <>
-          <img
+          <Image
             src={news.image}
             alt={news.title}
-            className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+            fill
+            sizes="(max-width: 768px) 100vw, 66vw"
+            className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 p-6 text-white sm:p-8">
@@ -39,11 +42,13 @@ function NewsCard({
         </>
       ) : (
         <>
-          <div className="mb-3 h-[270px] w-full shrink-0 overflow-hidden rounded-xl bg-slate-100">
-            <img
+          <div className="relative mb-3 h-[270px] w-full shrink-0 overflow-hidden rounded-xl bg-slate-100">
+            <Image
               src={news.image}
               alt={news.title}
-              className="h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
             />
           </div>
           <span className="mb-1.5 block text-xs text-slate-400">

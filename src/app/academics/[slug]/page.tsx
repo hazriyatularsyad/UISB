@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation"
 import Link from "next/link"
-import { FaArrowLeft } from "react-icons/fa"
+import Image from "next/image"
+import { FaArrowLeft } from "react-icons/fa6"
 import { siteData } from "@/data/site"
 import { getProgramBySlug } from "@/lib/data-store"
 import Dosen from "@/components/section/dosen"
@@ -27,11 +28,13 @@ export default async function AcademicDetail({
           Back to Programs
         </Link>
 
-        <Reveal direction="up" className="mb-8 overflow-hidden rounded-lg">
-          <img
+        <Reveal direction="up" className="relative mb-8 h-64 overflow-hidden rounded-lg md:h-130">
+          <Image
             src={program.image}
             alt={program.title}
-            className="h-64 w-full object-cover md:h-130"
+            fill
+            sizes="(max-width: 768px) 100vw, 1200px"
+            className="object-cover"
           />
         </Reveal>
 
