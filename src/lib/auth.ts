@@ -1,5 +1,6 @@
 import { createHmac, timingSafeEqual } from "node:crypto"
 import { cookies } from "next/headers"
+import { verifyDbUser } from "@/lib/users"
 
 export const SESSION_COOKIE = "uisb_session"
 const SESSION_TTL = 60 * 60 * 12 // 12 jam
@@ -52,9 +53,17 @@ export function createSessionCookie(username: string) {
   return signSession(username, expires)
 }
 
-export function validateCredentials(username: string, password: string): boolean {
+export async function validateCredentials(
+  username: string,
+  password: string,
+): Promise<boolean> {
   const adminUser = process.env.ADMIN_USERNAME ?? ""
   const adminPass = process.env.ADMIN_PASSWORD ?? ""
-  if (!adminUser || !adminPass) return false
-  return safeEqual(username, adminUser) && safeEqual(password, adminPass)
+  if (adminUser && adminPass) {
+    if (safeEqual(username, adminUser) && safeEqual(password, adminPass)) {
+      return true
+    }
+  }
+  if (!username || !password) return false
+  return await verifyDbUser(username, password)
 }

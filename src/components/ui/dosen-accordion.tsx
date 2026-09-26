@@ -76,7 +76,7 @@ export default function DosenAccordion({ items }: { items: DosenItem[] }) {
                 }
               }}
               className={cn(
-                "relative rounded-4xl overflow-hidden cursor-pointer",
+                "group relative rounded-4xl overflow-hidden cursor-pointer",
                 "transition-[flex-grow] duration-500 ease-out outline-none",
                 "focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2",
                 isActive ? "flex-[5]" : "flex-[0.6] hover:flex-[0.9]",
@@ -87,7 +87,7 @@ export default function DosenAccordion({ items }: { items: DosenItem[] }) {
                 alt={item.name}
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"
-                className="object-cover object-center"
+                className="cursor-pointer object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
               />
               <div
                 className={cn(

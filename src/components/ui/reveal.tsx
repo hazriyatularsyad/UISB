@@ -37,7 +37,7 @@ export function Reveal({
   delay = 0,
   duration = 0.6,
   amount = 0.2,
-  once = false,
+  once = true,
   className,
   as = "div",
 }: RevealProps) {
@@ -92,7 +92,7 @@ export function RevealItem({
   baseDelay = 0,
   duration = 0.55,
   amount = 0.2,
-  once = false,
+  once = true,
   className,
 }: RevealItemProps) {
   const reduce = useReducedMotion()
@@ -135,7 +135,7 @@ export function CountUp({
 }: CountUpProps) {
   const reduce = useReducedMotion()
   const ref = useRef<HTMLSpanElement>(null)
-  const inView = useInView(ref, { once: false, amount: 0.5 })
+  const inView = useInView(ref, { once: true, amount: 0.5 })
   const mv = useMotionValue(0)
   const spring = useSpring(mv, { stiffness: 60, damping: 20 })
   const [display, setDisplay] = useState(0)

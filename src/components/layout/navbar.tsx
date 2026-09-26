@@ -72,7 +72,9 @@ export default function Navbar({
         }}
         className="flex w-full items-center justify-between rounded-2xl border border-white/10 bg-fuchsia-800 shadow-lg shadow-uisb-purple/50 backdrop-blur-xl transition-shadow duration-500 hover:shadow-uisb-purple/50"
       >
-        <Logo logoSrc={logoSrc} logoText={logoText} />
+        
+          <Logo logoSrc={logoSrc} logoText={logoText} />
+        
 
         <div className="absolute left-1/2 hidden -translate-x-1/2 items-center space-x-1 md:flex">
           {navItems.map((item, i) => (
@@ -124,7 +126,13 @@ function Logo({ logoSrc, logoText }: { logoSrc?: string; logoText?: string }) {
         className="inline-flex"
       >
         {logoSrc ? (
-          <Image src={logoSrc} alt="Logo" width={145} height={64} className="h-8 w-auto md:h-10" />
+          <Image
+            src={logoSrc}
+            alt="Logo"
+            width={145}
+            height={64}
+            className="h-8 w-auto md:h-10"
+          />
         ) : (
           <span className="text-sm font-bold tracking-wider text-amber-500">
             {logoText}

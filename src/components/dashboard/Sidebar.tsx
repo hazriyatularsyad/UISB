@@ -9,19 +9,17 @@ import {
   FaBuilding,
   FaGear,
   FaComments,
-  FaUpRightFromSquare,
   FaGraduationCap,
   FaImages,
   FaWandMagicSparkles,
   FaNewspaper,
-  FaRightFromBracket,
   FaXmark,
   FaTrophy,
+  FaUserPlus,
   FaUsers,
   FaVideo,
 } from "react-icons/fa6"
 import { siteData } from "@/data/site"
-import { logoutAction } from "@/app/login/actions"
 
 type NavItem = {
   href: string
@@ -43,6 +41,7 @@ const links: NavItem[] = [
   { href: "/dashboard/dosen", label: "Dosen", icon: FaUsers },
   { href: "/dashboard/testimonials", label: "Testimonials", icon: FaComments },
   { href: "/dashboard/videos", label: "Videos", icon: FaVideo },
+  { href: "/dashboard/users", label: "Add Admin", icon: FaUserPlus },
 ]
 
 export default function DashboardSidebar() {
@@ -158,27 +157,6 @@ export default function DashboardSidebar() {
             })}
           </ul>
         </nav>
-        <div className="border-t border-slate-200 px-4 py-7">
-          <div className="mb-1 flex items-center gap-1.5">
-            <FaUpRightFromSquare className="h-3.5 w-3.5" aria-hidden />
-            <Link
-              href="/"
-              onClick={() => setOpen(false)}
-              className="flex items-center text-[15px] font-medium text-slate-500 transition-colors hover:text-slate-900"
-            >
-              Back to site
-            </Link>
-          </div>
-          <form action={logoutAction}>
-            <button
-              type="submit"
-              className="mt-1 flex w-full items-center gap-1.5 rounded-md px-0 py-1 text-[15px] font-medium text-slate-500 transition-colors hover:text-red-600"
-            >
-              <FaRightFromBracket className="h-3.5 w-3.5" aria-hidden />
-              Logout
-            </button>
-          </form>
-        </div>
       </aside>
     </>
   )

@@ -137,9 +137,9 @@ function VideoHeader() {
         Media
       </span>
       <h2 className="font-heading text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
-        Video Kegiatan UISB
+        UISB Video Highlights
       </h2>
-      <div className="mt-4 h-[2px] w-8 bg-amber-500" />
+      <div className="mt-4 h-[2px] w-20 bg-amber-500" />
     </Reveal>
   )
 }

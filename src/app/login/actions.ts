@@ -12,7 +12,7 @@ export async function loginAction(formData: FormData): Promise<{ error?: string 
     return { error: "Username dan password wajib diisi." }
   }
 
-  if (!validateCredentials(username, password)) {
+  if (!(await validateCredentials(username, password))) {
     return { error: "Username atau password salah." }
   }
 
