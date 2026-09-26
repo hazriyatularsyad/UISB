@@ -12,6 +12,7 @@ export interface HeroSectionProps {
   className?: string
   slides?: HeroSlideItem[] | { imageSrc: string; imageSrcMobile?: string; alt?: string }[]
   intervalMs?: number
+  children?: React.ReactNode
 }
 
 const FALLBACK_IMAGE = "/images/hero1.webp"
@@ -30,6 +31,7 @@ export const HeroSection = ({
   className,
   slides,
   intervalMs = 8000,
+  children,
 }: HeroSectionProps) => {
   const reduce = useReducedMotion()
 
@@ -167,6 +169,9 @@ export const HeroSection = ({
         {/* Vignette bawah untuk kontras navbar & teks */}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
       </div>
+
+      {/* Overlay children (mis. card informasi) — di atas gambar, di bawah navbar */}
+      {children}
     </div>
   )
 }

@@ -1,30 +1,33 @@
 import Image from "next/image"
-import { FaBookOpen, FaGlobe, FaLightbulb, FaPhone } from "react-icons/fa6"
+import { FaBookOpen, FaLightbulb } from "react-icons/fa6"
 import { CountUp, Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal"
 
 export default function AboutUs() {
   const features = [
     {
-      title: "Edukation Services",
+      title: "Regular Classes",
       description: "It is a long established fact that reader will to using content.",
       icon: <FaBookOpen className="h-6 w-6 text-amber-500" />,
     },
     {
-      title: "International Hubs",
+      title: "Online Classes",
       description: "It is a long established fact that reader will to using content.",
-      icon: <FaGlobe className="h-6 w-6 text-amber-500" />,
+      icon: <FaBookOpen className="h-6 w-6 text-amber-500" />,
     },
     {
-      title: "International Hub",
+      title: "Flexible Classes",
       description: "It is a long established fact that reader will to using content.",
-      icon: <FaGlobe className="h-6 w-6 text-amber-500" />,
+      icon: <FaBookOpen className="h-6 w-6 text-amber-500" />,
     },
   ]
 
   return (
     <section className="md:w-[150vh] md:mx-auto bg-white px-4 py-16 font-sans sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
-        <Reveal direction="left" className="grid grid-cols-2 items-start gap-4 lg:col-span-6">
+        <Reveal
+          direction="left"
+          className="grid grid-cols-2 items-start gap-4 lg:col-span-6"
+        >
           <div className="space-y-4">
             <div className="relative h-[320px] overflow-hidden rounded-[80px_80px_0_80px] shadow-sm">
               <Image
@@ -67,9 +70,14 @@ export default function AboutUs() {
           </div>
         </Reveal>
 
-        <Reveal direction="right" delay={0.1} className="space-y-6 lg:col-span-6">
+        <Reveal
+          direction="right"
+          delay={0.1}
+          className="space-y-6 lg:col-span-6"
+        >
           <h2 className="text-3xl font-extrabold leading-tight text-slate-800 sm:text-5xl">
-            TOWARDS <span className="text-amber-500"> CAMPUS</span> BUSINESS DIGITAL
+            TOWARDS <span className="text-amber-500"> CAMPUS</span> BUSINESS
+            DIGITAL
           </h2>
           <h2 className="text-3xl font-extrabold leading-tight text-slate-800 sm:text-4xl">
             Our Edukation System <br />
@@ -105,9 +113,8 @@ export default function AboutUs() {
             <RevealItem index={features.length} direction="left">
               <div className="relative flex flex-col justify-between rounded-2xl border border-amber-100/50 bg-fuchsia-50/80 p-5">
                 <p className="text-l italic leading-relaxed text-gray-500">
-                  It is a long established fact that a reader will be distracted
-                  by the content of a page when looking at its reader for the long
-                  words layout.
+                  The university has become a place that prepares you for the
+                  fights in the World
                 </p>
                 <div className="mt-4 text-right font-serif text-2xl font-bold tracking-widest text-uisb-purple">
                   &rdquo;&rdquo;
@@ -115,31 +122,6 @@ export default function AboutUs() {
               </div>
             </RevealItem>
           </RevealGroup>
-
-          <div className="flex flex-wrap items-center gap-6 pt-4">
-            {/* <button className="group flex items-center space-x-2 rounded-full bg-fuchsia-700 px-6 py-3.5 text-m font-semibold text-white shadow-md transition-all hover:bg-amber-600">
-              <span>DISCOVER MORE</span>
-              <span className="transition-transform group-hover:translate-x-1">
-                &rarr;
-              </span>
-            </button> */}
-            {/* <div className="flex items-center space-x-3">
-              <div className="rounded-full bg-amber-500 p-3 text-white shadow-sm">
-                <FaPhone className="h-4 w-4" />
-              </div>
-              <div>
-                <span className="block text-xs font-medium text-gray-400">
-                  Call Now
-                </span>
-                <a
-                  href="tel:+21236547898"
-                  className="text-sm font-bold text-slate-800 transition-colors hover:text-amber-500"
-                >
-                  +2 123 654 7898
-                </a>
-              </div>
-            </div> */}
-          </div>
         </Reveal>
       </div>
     </section>

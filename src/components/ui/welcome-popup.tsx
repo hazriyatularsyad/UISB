@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { motion, AnimatePresence, useReducedMotion } from "motion/react"
 import { EventCountdownCard } from "@/components/ui/event-countdown-card"
 import { cn } from "@/lib/utils"
+import { OPEN_POPUP_EVENT } from "@/lib/popup-event"
 import type { PopupItem } from "@/lib/data-store"
 
 const SLIDE_INTERVAL = 10000 // ms
@@ -14,16 +15,34 @@ export default function WelcomePopup({ data }: { data: PopupItem[] }) {
 
   const [isOpen, setIsOpen] = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
 
   const hasMultiple = items.length > 1
 
-  // Popup muncul setiap load/refresh (tanpa cookie)
+  // Deteksi viewport mobile
   useEffect(() => {
-    if (items.length === 0) return
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
+
+  // Popup muncul setiap load/refresh (tanpa cookie) — hanya di mobile
+  useEffect(() => {
+    if (items.length === 0 || !isMobile) return
 
     const timer = setTimeout(() => setIsOpen(true), 600)
     return () => clearTimeout(timer)
-  }, [items.length])
+  }, [items.length, isMobile])
+
+  // Buka popup dari trigger lain (CTA card hero) — hanya di mobile
+  useEffect(() => {
+    const onOpen = () => {
+      if (isMobile) setIsOpen(true)
+    }
+    window.addEventListener(OPEN_POPUP_EVENT, onOpen)
+    return () => window.removeEventListener(OPEN_POPUP_EVENT, onOpen)
+  }, [isMobile])
 
   // Auto-advance slides while open
   useEffect(() => {

@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import Image from "next/image"
 import { FaWhatsapp } from "react-icons/fa6"
 
 const WA_NUMBER = "628116655515"
@@ -153,31 +154,22 @@ export default function WhatsappFloat() {
           </div>
         </div>
 
-        {/* FAB */}
+        {/* Floating Mascot - always visible */}
         <button
           type="button"
           aria-label="Chat via WhatsApp"
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="group relative inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_8px_24px_rgba(0,0,0,0.18)] transition-all hover:bg-[#20bd5a] hover:shadow-[0_12px_32px_rgba(0,0,0,0.22)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#25D366]/30"
+          className="group relative inline-flex h-24 w-24 items-center justify-center transition-all hover:scale-105 hover:-translate-y-1 active:translate-y-0 active:scale-100 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-uisb-purple/30"
         >
-          <span className="absolute inset-0 rounded-full ring-1 ring-black/5" aria-hidden />
-          {open ? (
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="h-6 w-6"
-              aria-hidden
-            >
-              <path d="M6 6l12 12M18 6L6 18" />
-            </svg>
-          ) : (
-            <FaWhatsapp className="h-7 w-7" aria-hidden />
-          )}
+          <Image
+            src="/images/cs-logo.png"
+            alt="Customer Service"
+            width={96}
+            height={96}
+            className="h-full w-full object-contain drop-shadow-[0_8px_24px_rgba(0,0,0,0.18)]"
+            priority
+          />
         </button>
       </div>
     </>

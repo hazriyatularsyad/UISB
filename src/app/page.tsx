@@ -16,7 +16,7 @@ export default async function Home() {
   ])
   return (
     <>
-      <HeroUi slides={heroSlides} />
+      <HeroUi slides={heroSlides} popups={popups} />
       <AboutUs />
       <AcademicsSection />
       <LatestNews />
