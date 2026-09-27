@@ -115,11 +115,7 @@ export default function Navbar({
 
 function Logo({ logoSrc, logoText }: { logoSrc?: string; logoText?: string }) {
   return (
-    <a
-      href="/"
-      className="group relative z-10 flex shrink-0 items-center gap-2"
-      aria-label="Beranda"
-    >
+  
       <motion.span
         whileHover={{ rotate: [0, -8, 8, 0] }}
         transition={{ duration: 0.5 }}
@@ -139,7 +135,7 @@ function Logo({ logoSrc, logoText }: { logoSrc?: string; logoText?: string }) {
           </span>
         )}
       </motion.span>
-    </a>
+    
   )
 }
 

@@ -1,56 +1,87 @@
 "use client"
 
 import { useState } from "react"
-import { FaLocationDot } from "react-icons/fa6"
 import { maps } from "@/data/site"
-import { Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal"
+import { Reveal } from "@/components/ui/reveal"
+import { cn } from "@/lib/utils"
 
 export default function CampusMap() {
   const [active, setActive] = useState(maps[0])
 
   return (
     <section className="md:w-[150vh] md:mx-auto px-4 py-16 font-sans sm:px-6 lg:px-8">
-      <Reveal direction="up" className="mb-8">
-        <h2 className="text-2xl font-bold tracking-tight text-slate-900">Our Campuses</h2>
-      </Reveal>
+        <Reveal direction="up">
+          <div className="space-y-4 text-center">
+            <p className="text-xs font-bold uppercase tracking-widest text-uisb-purple">
+              Lokasi
+            </p>
+            <h2 className="font-heading text-3xl font-bold text-slate-900 sm:text-4xl">
+              Fakultas & Rektorat
+            </h2>
+            <div className="mx-auto h-px w-8 bg-amber-500" />
+            <p className="mx-auto max-w-2xl text-sm text-slate-600 mb-6">
+              Built on 30 years of academic excellence, delivering quality
+              education that empowers students to succeed in a rapidly evolving
+              world.
+            </p>
+          </div>
+        </Reveal>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
-        <RevealGroup className="flex flex-col gap-3 lg:col-span-4">
-          {maps.map((loc, i) => (
-            <RevealItem key={loc.id} index={i} direction="left" stagger={0.1}>
+      {/* Horizontal tab navigation */}
+      <div className="mb-6  overflow-x-auto sm:mx-0 flex justify-center">
+        <div
+          role="tablist"
+          aria-orientation="horizontal"
+          className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white p-1.5 shadow-sm mx-auto"
+        >
+          {maps.map((loc) => {
+            const isActive = active.id === loc.id
+            return (
               <button
+                key={loc.id}
+                type="button"
+                role="tab"
+                id={`map-tab-${loc.id}`}
+                aria-selected={isActive}
+                aria-controls={`map-panel-${loc.id}`}
+                tabIndex={isActive ? 0 : -1}
                 onClick={() => setActive(loc)}
-                className={`flex w-full items-start gap-3 rounded-xl border p-4 text-left transition-all ${
-                  active.id === loc.id
-                    ? "border-amber-500 bg-amber-50 shadow-sm"
-                    : "border-slate-200 bg-white hover:border-slate-300"
-                }`}
+                className={cn(
+                  "relative rounded-lg border-b-2 border-transparent px-5 py-2 text-sm font-semibold whitespace-nowrap transition-all duration-200",
+                  "text-slate-600 hover:text-slate-800 hover:bg-slate-50",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 cursor-pointer",
+                  "focus-visible:ring-uisb-purple/50",
+                  isActive
+                    ? "text-uisb-purple border-b-uisb-purple shadow-sm"
+                    : "hover:border-b-slate-300",
+                )}
               >
-                <FaLocationDot
-                  className={`mt-0.5 h-5 w-5 shrink-0 ${
-                    active.id === loc.id ? "text-amber-500" : "text-slate-400"
-                  }`}
-                />
-                <div>
-                  <h3 className="text-sm font-bold text-slate-800">{loc.name}</h3>
-                  <p className="mt-0.5 text-xs leading-relaxed text-slate-500">{loc.address}</p>
-                </div>
+                {loc.name}
               </button>
-            </RevealItem>
-          ))}
-        </RevealGroup>
+            )
+          })}
+        </div>
+      </div>
 
-        <Reveal direction="right" delay={0.15} className="overflow-hidden rounded-xl border border-slate-200 lg:col-span-8">
+      {/* Map panel synchronized with active tab */}
+      <Reveal direction="up" delay={0.1}>
+        <div
+          id={`map-panel-${active.id}`}
+          role="tabpanel"
+          tabIndex={0}
+          aria-labelledby={`map-tab-${active.id}`}
+          className="overflow-hidden rounded-xl border border-slate-200 shadow"
+        >
           <iframe
-            title={`Map of ${active.name}`}
+            title={`Peta lokasi ${active.name}`}
             src={active.embedUrl}
-            className="h-[400px] w-full border-0 lg:h-[480px]"
+            className="block h-[400px] w-full border-0 lg:h-[480px]"
             loading="lazy"
             allowFullScreen
             referrerPolicy="strict-origin-when-cross-origin"
           />
-        </Reveal>
-      </div>
+        </div>
+      </Reveal>
     </section>
   )
 }

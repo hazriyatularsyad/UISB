@@ -29,7 +29,7 @@ export default async function InformationDetailPage({
           aria-label="Campus Information"
         >
           <FaArrowLeft className="mr-2 h-4 w-4 text-uisb-orange" />
-          Back to Information
+          Kembali Ke Beranda
         </Link>
 
         <Reveal

@@ -62,10 +62,13 @@ export default async function FacilityDetailPage({
           className="mb-8 inline-flex items-center text-sm font-semibold text-gray-300 transition-colors hover:text-white"
         >
           <FaArrowLeft className="mr-2 h-4 w-4" />
-          Back to Facilities
+          Kembali Ke Beranda
         </Link>
 
-        <Reveal direction="up" className="relative mb-8 h-64 overflow-hidden rounded-lg md:h-130">
+        <Reveal
+          direction="up"
+          className="relative mb-8 h-64 overflow-hidden rounded-lg md:h-130"
+        >
           <Image
             src={facility.image}
             alt={facility.title}
@@ -81,7 +84,7 @@ export default async function FacilityDetailPage({
               <FacilityIcon
                 icon={facility.icon}
                 size={22}
-                className="text-white"
+                className="text-amber-500"
               />
             </span>
             <span className="text-xs font-bold uppercase tracking-widest text-amber-500">
