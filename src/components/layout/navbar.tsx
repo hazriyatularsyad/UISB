@@ -116,9 +116,9 @@ export default function Navbar({
 function Logo({ logoSrc, logoText }: { logoSrc?: string; logoText?: string }) {
   return (
     <a
-      href="#"
+      href="/"
       className="group relative z-10 flex shrink-0 items-center gap-2"
-      aria-label="Home"
+      aria-label="Beranda"
     >
       <motion.span
         whileHover={{ rotate: [0, -8, 8, 0] }}

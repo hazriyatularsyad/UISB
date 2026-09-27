@@ -83,10 +83,7 @@ Sections, top to bottom:
 - `export const dynamic = "force-dynamic"` so new entries appear instantly
 
 #### 3.1.5 API Endpoints
-| Route | Method | Returns |
-|---|---|---|
-| `/api/information` | GET | Active information array (JSON) |
-| `/api/achievements` | GET | Active achievements array (JSON) |
+No HTTP API layer is exposed. Public pages read data directly from the server-side data-store layer (Supabase Postgres via `src/lib/data-store.ts`). If an HTTP API is ever needed for external consumers, expose only the entities that are actually required — do not mirror every entity (see RULES.md — YAGNI).
 
 ### 3.2 Admin Dashboard (`/dashboard`)
 

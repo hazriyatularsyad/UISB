@@ -25,7 +25,7 @@ seo:
   opening: |
     UISB's marketing site is built around a deep purple brand (#681e91) with restrained, purpose-driven motion. The navbar is a fixed glassmorphic pill that links to FACILITY (/facility), a DB-driven FACULTY dropdown (programs from Supabase), and an ABOUT US dropdown. The hero is a full-bleed image carousel (min-h-100dvh) that auto-rotates through 3 campus slides with a crossfade. Every section below the fold enters with a scroll-reveal (fade + slide) and grid items stagger in sequence.
 
-    Content is 100% database-driven (Supabase Postgres). The admin dashboard (/dashboard) provides CRUD for 9 entity types. Public pages: / (home), /academics/[slug], /facility, /facility/[slug], /information, /information/[slug]. An API layer (/api/information, /api/achievements) exposes active content as JSON.
+    Content is 100% database-driven (Supabase Postgres). The admin dashboard (/dashboard) provides CRUD for 9 entity types. Public pages: / (home), /academics/[slug], /facility, /facility/[slug], /information, /information/[slug]. Public pages fetch data directly from the data-store layer on the server; no HTTP API layer is exposed.
 
   associated: []
   related:
@@ -59,7 +59,7 @@ seo:
       answer: "Supabase Postgres accessed through src/lib/db.ts (pool) + src/lib/data-store.ts (typed CRUD with revalidatePath). Tables: programs, facilities, information, achievements, popups, news, dosen, testimonials, videos. The dashboard (/dashboard) provides an admin CRUD for all of them. List pages force-dynamic so new content appears instantly."
     - id: "public-pages"
       title: "What public routes exist?"
-      answer: "/ (home: hero, about, academics, news, achievement, people-say, video, campus-map), /academics/[slug], /facility + /facility/[slug], /information + /information/[slug]. Plus /api/information and /api/achievements JSON endpoints. Dashboard at /dashboard."
+      answer: "/ (home: hero, about, academics, news, achievement, people-say, video, campus-map), /academics/[slug], /facility + /facility/[slug], /information + /information/[slug]. Dashboard at /dashboard. (No HTTP API endpoints — public pages read data directly from the server-side data-store layer.)"
   mockups:
     - "marketing-hero"
     - "academic-grid"
@@ -438,4 +438,4 @@ Binary radius scale — rounded-4xl (24px) for content, rounded-full (9999px) fo
 - **Dark mode:** ships light-only; reserved tokens exist but `dark:` variants are not implemented.
 - **Focus-visible matrix:** keyboard tab order works; full focus-ring styling not yet uniform across all cards.
 - **Accessibility:** labels on dashboard forms now carry matching `htmlFor`/`id`; `aria-hidden` on decorative icons is applied; reduced-motion supported.
-- **API layer:** `/api/information` and `/api/achievements` expose active content as JSON; other entities can be exposed on the same pattern.
+- **API layer:** None. Public pages read data directly from the server-side data-store layer. If an HTTP API is ever needed, expose only the entities that external consumers require (see RULES.md — YAGNI).

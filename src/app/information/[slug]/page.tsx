@@ -26,12 +26,16 @@ export default async function InformationDetailPage({
         <Link
           href="/information"
           className="mb-6 inline-flex items-center text-sm font-semibold text-slate-700 transition-colors hover:text-amber-600"
+          aria-label="Campus Information"
         >
           <FaArrowLeft className="mr-2 h-4 w-4 text-uisb-orange" />
           Back to Information
         </Link>
 
-        <Reveal direction="up" className="relative mb-6 h-64 overflow-hidden rounded-lg md:h-130">
+        <Reveal
+          direction="up"
+          className="relative mb-6 h-64 overflow-hidden rounded-lg md:h-130"
+        >
           <Image
             src={item.image}
             alt={item.title}

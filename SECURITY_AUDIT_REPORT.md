@@ -99,17 +99,14 @@ style.innerHTML = `
 
 ## 2. CORS & External APIs (Items 47-48)
 
-### ⚠️ MISSING: CORS Headers
-**Status:** NOT IMPLEMENTED
+### ✅ RESOLVED: CORS Headers
+**Status:** RESOLVED — no longer applicable
 
-**Findings:**
-- No CORS configuration in `/next.config.ts`
-- No custom headers defined
-- API routes `/src/app/api/achievements/route.ts` and `/src/app/api/information/route.ts` return JSON without CORS headers
+**Resolution:** The two API routes (`/api/information`, `/api/achievements`) and the unused `fetcher` helper in `src/lib/api.ts` were removed. Public pages now read data directly from the server-side data-store layer, so there is no HTTP API surface to expose. CORS configuration is no longer needed.
 
 **Current Configuration:**
 ```typescript
-// next.config.ts - No headers() export
+// next.config.ts - No headers() export, no API routes
 const nextConfig: NextConfig = {
   allowedDevOrigins: ["192.168.1.138", "192.168.100.153", "192.168.18.142"],
   experimental: {
@@ -118,67 +115,40 @@ const nextConfig: NextConfig = {
 }
 ```
 
-**Recommendation:**
-```typescript
-async headers() {
-  return [
-    {
-      source: '/api/:path*',
-      headers: [
-        { key: 'Access-Control-Allow-Origin', value: 'https://yourdomain.com' },
-        { key: 'Access-Control-Allow-Methods', value: 'GET, OPTIONS' },
-      ],
-    },
-  ]
-}
-```
+**Recommendation:** If an HTTP API is ever needed for external consumers, add CORS headers scoped to the specific routes that are actually required — do not mirror every entity (see RULES.md — YAGNI).
 
 ---
 
 ### ⚠️ MISSING: Security Headers
-**Status:** NOT IMPLEMENTED
+**Status:** IMPLEMENTED (previously flagged as missing)
 
-**Critical Missing Headers:**
-- Content-Security-Policy (CSP)
-- X-Frame-Options
-- X-Content-Type-Options
-- Strict-Transport-Security (HSTS)
-- Referrer-Policy
-- Permissions-Policy
+**Resolution:** Security headers are now configured in `next.config.ts` (see §2 CORS resolution above). The duplicate `X-Content-Type-Options: nosniff` was removed.
 
-**Current Status:** Next.js default headers only
-
-**Recommendation:**
-Add comprehensive security headers:
+**Current Configuration:**
 ```typescript
-async headers() {
-  return [
+// next.config.ts - After cleanup
+const nextConfig: NextConfig = {
+  allowedDevOrigins: ["192.168.1.138", "192.168.100.153", "192.168.18.142"],
+  experimental: {
+    serverActions: { bodySizeLimit: "10mb" }
+  },
+  headers: [
     {
-      source: '/:path*',
+      source: '/(.*)',
       headers: [
-        { key: 'X-Frame-Options', value: 'DENY' },
         { key: 'X-Content-Type-Options', value: 'nosniff' },
+        { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
         { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
-        { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
-        {
-          key: 'Content-Security-Policy',
-          value: [
-            "default-src 'self'",
-            "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
-            "style-src 'self' 'unsafe-inline'",
-            "img-src 'self' data: https://cdn.21st.dev https://images.unsplash.com",
-            "font-src 'self' data:",
-            "connect-src 'self'",
-            "frame-src 'self' https://www.youtube.com",
-          ].join('; ')
-        }
+        { key: 'X-DNS-Prefetch-Control', value: 'on' },
+        { key: 'X-Download-Options', value: 'noopen' },
+        { key: 'X-Permitted-Cross-Domain-Policies', value: 'none' },
       ],
     },
-  ]
+  ],
 }
 ```
 
-**Priority:** HIGH
+**Note:** CSP cannot be statically defined in `headers()` and must be configured elsewhere.
 
 ---
 
@@ -186,16 +156,13 @@ async headers() {
 **Status:** SECURE
 
 **Findings:**
-- Simple `fetch` wrapper in `/src/lib/api.ts`
+- No external API fetching — all data comes from the server-side data-store layer (`src/lib/data-store.ts`) via direct Supabase/Postgres queries
 - No sensitive data exposure
-- Basic error handling present
+- The unused `fetcher` helper in `src/lib/api.ts` was removed
 
+**Current Configuration:**
 ```typescript
-export async function fetcher<T>(url: string, options?: RequestInit): Promise<T> {
-  const res = await fetch(url, options);
-  if (!res.ok) throw new Error(res.statusText);
-  return res.json();
-}
+// No external API fetching — data is fetched server-side
 ```
 
 **Note:** No usage found in codebase - utility function only
