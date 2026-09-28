@@ -161,7 +161,7 @@ export default function WhatsappFloat() {
             aria-label="Chat via WhatsApp"
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className="group relative inline-flex h-20 w-20 items-center justify-center transition-all hover:scale-105 hover:-translate-y-1 active:translate-y-0 active:scale-100 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-uisb-purple/30"
+            className="group relative inline-flex md:h-20 md:w-20 h-14 w-14 items-center justify-center transition-all hover:scale-105 hover:-translate-y-1 active:translate-y-0 active:scale-100 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-uisb-purple/30"
           >
             <Image
               src="/images/cs-logo.png"

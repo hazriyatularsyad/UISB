@@ -8,6 +8,17 @@ import { OPEN_POPUP_EVENT } from "@/lib/popup-event"
 import type { PopupItem } from "@/lib/data-store"
 
 const SLIDE_INTERVAL = 10000 // ms
+const WELCOME_SESSION_COOKIE = "uisb_welcome_shown"
+
+function getWelcomeCookie(): boolean {
+  if (typeof document === "undefined") return false
+  return document.cookie.split("; ").some((row) => row.startsWith(`${WELCOME_SESSION_COOKIE}=1`))
+}
+
+function setWelcomeCookie() {
+  if (typeof document === "undefined") return
+  document.cookie = `${WELCOME_SESSION_COOKIE}=1; path=/; SameSite=Lax`
+}
 
 export default function WelcomePopup({ data }: { data: PopupItem[] }) {
   const items = data ?? []
@@ -16,6 +27,7 @@ export default function WelcomePopup({ data }: { data: PopupItem[] }) {
   const [isOpen, setIsOpen] = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
+  const [hasSeenWelcome, setHasSeenWelcome] = useState(false)
 
   const hasMultiple = items.length > 1
 
@@ -27,22 +39,21 @@ export default function WelcomePopup({ data }: { data: PopupItem[] }) {
     return () => window.removeEventListener("resize", checkMobile)
   }, [])
 
-  // Popup muncul setiap load/refresh (tanpa cookie) — hanya di mobile
+  // Cek session cookie saat mount
   useEffect(() => {
-    if (items.length === 0 || !isMobile) return
+    setHasSeenWelcome(getWelcomeCookie())
+  }, [])
 
-    const timer = setTimeout(() => setIsOpen(true), 600)
+  // Popup muncul sekali per sesi browser — hanya di mobile
+  useEffect(() => {
+    if (items.length === 0 || !isMobile || hasSeenWelcome) return
+
+    const timer = setTimeout(() => {
+      setIsOpen(true)
+      setWelcomeCookie()
+    }, 600)
     return () => clearTimeout(timer)
-  }, [items.length, isMobile])
-
-  // Buka popup dari trigger lain (CTA card hero) — hanya di mobile
-  useEffect(() => {
-    const onOpen = () => {
-      if (isMobile) setIsOpen(true)
-    }
-    window.addEventListener(OPEN_POPUP_EVENT, onOpen)
-    return () => window.removeEventListener(OPEN_POPUP_EVENT, onOpen)
-  }, [isMobile])
+  }, [items.length, isMobile, hasSeenWelcome])
 
   // Auto-advance slides while open
   useEffect(() => {
