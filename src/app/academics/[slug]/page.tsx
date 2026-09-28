@@ -28,7 +28,10 @@ export default async function AcademicDetail({
           Back to Programs
         </Link>
 
-        <Reveal direction="up" className="relative mb-8 h-64 overflow-hidden rounded-lg md:h-130">
+        <Reveal
+          direction="up"
+          className="relative mb-8 h-64 overflow-hidden rounded-lg md:h-130"
+        >
           <Image
             src={program.image}
             alt={program.title}

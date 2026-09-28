@@ -5,27 +5,29 @@ import { maps } from "@/data/site"
 import { Reveal } from "@/components/ui/reveal"
 import { cn } from "@/lib/utils"
 
+
+
 export default function CampusMap() {
   const [active, setActive] = useState(maps[0])
 
   return (
     <section className="md:w-[150vh] md:mx-auto px-4 py-16 font-sans sm:px-6 lg:px-8">
-        <Reveal direction="up">
-          <div className="space-y-4 text-center">
-            <p className="text-xs font-bold uppercase tracking-widest text-uisb-purple">
-              Lokasi
-            </p>
-            <h2 className="font-heading text-3xl font-bold text-slate-900 sm:text-4xl">
-              Fakultas & Rektorat
-            </h2>
-            <div className="mx-auto h-px w-8 bg-amber-500" />
-            <p className="mx-auto max-w-2xl text-sm text-slate-600 mb-6">
-              Built on 30 years of academic excellence, delivering quality
-              education that empowers students to succeed in a rapidly evolving
-              world.
-            </p>
-          </div>
-        </Reveal>
+      <Reveal direction="up">
+        <div className="space-y-4 text-center">
+          <p className="text-xs font-bold uppercase tracking-widest text-uisb-purple">
+            Lokasi
+          </p>
+          <h2 className="font-heading text-3xl font-bold text-slate-900 sm:text-4xl">
+            Fakultas & Rektorat
+          </h2>
+          <div className="mx-auto h-px w-8 bg-amber-500" />
+          <p className="mx-auto max-w-2xl text-sm text-slate-600 mb-6">
+            Built on 30 years of academic excellence, delivering quality
+            education that empowers students to succeed in a rapidly evolving
+            world.
+          </p>
+        </div>
+      </Reveal>
 
       {/* Horizontal tab navigation */}
       <div className="mb-6  overflow-x-auto sm:mx-0 flex justify-center">
@@ -52,7 +54,7 @@ export default function CampusMap() {
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 cursor-pointer",
                   "focus-visible:ring-uisb-purple/50",
                   isActive
-                    ? "text-uisb-purple border-b-uisb-purple shadow-sm"
+                    ? "text-amber-700 border-b-amber-600 shadow-sm"
                     : "hover:border-b-slate-300",
                 )}
               >
@@ -65,6 +67,7 @@ export default function CampusMap() {
 
       {/* Map panel synchronized with active tab */}
       <Reveal direction="up" delay={0.1}>
+     
         <div
           id={`map-panel-${active.id}`}
           role="tabpanel"

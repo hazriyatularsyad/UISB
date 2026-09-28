@@ -99,6 +99,7 @@ export const maps = [
   {
     id: 1,
     name: "Rektorat",
+    desc: "Kantor Pengurusan Mahasiswa",
     address: "UISB - Universitas Islam Sumatera Barat Rektorat",
     embedUrl:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4976.356606312756!2d100.33965887587142!3d-0.8331329991587771!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e2b330fb8c54faf%3A0xa981428fcd1a41f5!2sUISB%20-%20Universitas%20Islam%20Sumatera%20Barat%20Rektorat!5e1!3m2!1sen!2sid!4v1788858864456!5m2!1sen!2sid",
@@ -106,6 +107,7 @@ export const maps = [
   {
     id: 2,
     name: "Gedung A",
+    desc: "Gedung Pembelajaran IT",
     address: "UISB - Universitas Islam Sumatera Barat Gedung A",
     embedUrl:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4976.3225791848345!2d100.37023337587152!3d-0.8596519991320165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2fd4c715e4745a3b%3A0x2b47cb403ee11b0!2sUISB%20-%20Universitas%20Islam%20Sumatera%20Barat%20Gedung%20A!5e1!3m2!1sen!2sid!4v1788858952019!5m2!1sen!2sid",
@@ -113,6 +115,7 @@ export const maps = [
   {
     id: 3,
     name: "Gedung B",
+    desc: "Gedung Pembelajaran SOSHUM",
     address: "UISB - Universitas Islam Sumatera Barat Gedung B",
     embedUrl:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4976.373210659457!2d100.33007677587148!3d-0.8198810991721562!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2fd4c1247f94a639%3A0xba2c7c7a05da8a30!2sUISB%20-%20Universitas%20Islam%20Sumatera%20Barat%20Gedung%20B!5e1!3m2!1sen!2sid!4v1788859000945!5m2!1sen!2sid",

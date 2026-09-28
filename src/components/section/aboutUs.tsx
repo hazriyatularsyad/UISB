@@ -15,7 +15,7 @@ export default function AboutUs() {
       icon: <FaBookOpen className="h-6 w-6 text-amber-500" />,
     },
     {
-      title: "Flexible Classes",
+      title: "Hybrid Classes",
       description: "It is a long established fact that reader will to using content.",
       icon: <FaBookOpen className="h-6 w-6 text-amber-500" />,
     },
