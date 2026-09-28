@@ -1,27 +1,44 @@
 "use client"
 
-import { useState, useTransition } from "react"
+import { useState } from "react"
 import Image from "next/image"
-import { useSearchParams } from "next/navigation"
+import { useSearchParams, useRouter } from "next/navigation"
 import { FaLock, FaUser } from "react-icons/fa6"
-import { loginAction } from "./actions"
 import LoadingBars from "./loading-bars"
 
 export default function LoginForm() {
   const searchParams = useSearchParams()
+  const router = useRouter()
   const from = searchParams.get("from") ?? "/dashboard"
-  const [pending, startTransition] = useTransition()
   const [error, setError] = useState<string | null>(null)
+  const [pending, setPending] = useState(false)
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
     formData.set("from", from)
     setError(null)
-    startTransition(async () => {
-      const res = await loginAction(formData)
-      if (res?.error) setError(res.error)
-    })
+    setPending(true)
+
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        body: formData,
+        credentials: "same-origin",
+      })
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        setError(data.error || "Login gagal")
+      } else if (data.redirect) {
+        window.location.href = data.redirect
+      } else {
+        window.location.href = "/dashboard"
+      }
+    } finally {
+      setPending(false)
+    }
   }
 
   return (

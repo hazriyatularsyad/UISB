@@ -1,5 +1,6 @@
-import { createHmac, timingSafeEqual } from "node:crypto"
+import { createHmac, timingSafeEqual, createHash } from "node:crypto"
 import { cookies } from "next/headers"
+import { query } from "@/lib/db"
 import { verifyDbUser } from "@/lib/users"
 
 export const SESSION_COOKIE = "uisb_session"
@@ -29,14 +30,21 @@ export function signSession(username: string, expires: number): string {
   return `${payload}.${hmac(payload)}`
 }
 
-export function verifySession(token: string): boolean {
+export async function verifySession(token: string): Promise<boolean> {
   const parts = token.split(".")
   if (parts.length !== 3) return false
   const [username, expiry, sig] = parts
   const payload = `${username}.${expiry}`
   const expected = hmac(payload)
   if (!safeEqual(sig, expected)) return false
-  return Number(expiry) > Date.now()
+  if (Number(expiry) <= Date.now()) return false
+  // check revocation
+  const hash = createHash("sha256").update(token).digest("hex")
+  const rows = await query(
+    "SELECT 1 FROM revoked_tokens WHERE token_hash = $1 AND expires_at > NOW()",
+    [hash]
+  )
+  return rows.length === 0
 }
 
 export async function getSessionUser(): Promise<string | null> {
@@ -44,13 +52,24 @@ export async function getSessionUser(): Promise<string | null> {
   const token = store.get(SESSION_COOKIE)?.value
   if (!token) return null
   const parts = token.split(".")
-  if (parts.length !== 3 || !verifySession(token)) return null
+  if (parts.length !== 3 || !(await verifySession(token))) return null
   return parts[0]
 }
 
 export function createSessionCookie(username: string) {
   const expires = Date.now() + SESSION_TTL * 1000
   return signSession(username, expires)
+}
+
+export async function revokeToken(token: string): Promise<void> {
+  const parts = token.split(".")
+  if (parts.length !== 3) return
+  const expiry = Number(parts[1])
+  const hash = createHash("sha256").update(token).digest("hex")
+  await query(
+    "INSERT INTO revoked_tokens (token_hash, expires_at) VALUES ($1, to_timestamp($2::bigint/1000)) ON CONFLICT DO NOTHING",
+    [hash, expiry]
+  )
 }
 
 export async function validateCredentials(
