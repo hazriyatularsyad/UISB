@@ -148,7 +148,7 @@ function PmbButton() {
     >
       <span className="pointer-events-none absolute right-1.5 top-1/2 h-7 w-7 -translate-y-1/2 rounded-full bg-white motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-out motion-safe:group-hover:scale-[10]" />
       <span className="relative z-10 motion-safe:transition-colors duration-500 group-hover:text-[#FF5500]">
-        PMB
+        Daftar Sekarang
       </span>
       <span className="relative z-10 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white motion-safe:transition-transform duration-300 group-hover:translate-x-0.5">
         <FaArrowRight className="h-3.5 w-3.5 text-[#FF5500]" />

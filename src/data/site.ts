@@ -1,9 +1,10 @@
 export const siteData = {
   nav: [
-    { label: "HOME", href: "#" },
-    { label: "PRODUCT", href: "#" },
-    { label: "STORE", href: "#" },
-    { label: "ABOUT US", href: "#" },
+    { label: "HOME", href: "/" },
+    { label: "AKADEMIK", href: "/academics" },
+    { label: "FASILITAS", href: "/facility" },
+    { label: "INFORMASI", href: "/information" },
+    { label: "SAMBUTAN REKTOR", href: "/sambutanRektor" },
   ],
   contact: {
     whatsapp: "628116655515",
@@ -28,7 +29,7 @@ export const siteData = {
     description:
       "Discover programs designed to challenge you, support you, and set you up for success.",
     ctaText: "View All Programs",
-    ctaHref: "#all-programs",
+    ctaHref: "/academics",
     programs: [
       {
         slug: "Sistem-Informasi",

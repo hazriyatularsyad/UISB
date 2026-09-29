@@ -11,7 +11,7 @@ export default function CampusMap() {
   const [active, setActive] = useState(maps[0])
 
   return (
-    <section className="md:w-[150vh] md:mx-auto px-4 py-16 font-sans sm:px-6 lg:px-8">
+    <section className="w-full md:mx-auto bg-gradient-to-b from-white to-fuchsia-950 px-4 py-16 font-sans sm:px-6 lg:px-8">
       <Reveal direction="up">
         <div className="space-y-4 text-center">
           <p className="text-xs font-bold uppercase tracking-widest text-uisb-purple">
@@ -67,7 +67,6 @@ export default function CampusMap() {
 
       {/* Map panel synchronized with active tab */}
       <Reveal direction="up" delay={0.1}>
-     
         <div
           id={`map-panel-${active.id}`}
           role="tabpanel"

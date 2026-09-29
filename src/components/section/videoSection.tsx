@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence, useReducedMotion } from "motion/react"
 import { FaPlay, FaXmark } from "react-icons/fa6"
@@ -24,100 +24,152 @@ function extractYoutubeId(urlOrId: string): string {
 export default function VideoSection({ items }: { items: VideoItem[] }) {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null)
   const [active, setActive] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
   const reduce = useReducedMotion()
 
+  const next = useCallback(() => {
+    setActive((prev) => (items.length ? (prev + 1) % items.length : 0))
+  }, [items.length])
+
+  const prev = useCallback(() => {
+    setActive((prev) => (items.length ? (prev - 1 + items.length) % items.length : 0))
+  }, [items.length])
+
   useEffect(() => {
-    if (items.length <= 1) return
-    const id = setInterval(() => {
-      if (selectedVideo) return
-      setActive((prev) => (prev + 1) % items.length)
-    }, 3000)
+    if (items.length <= 1 || isPaused || selectedVideo) return
+    const id = setInterval(next, 5000)
     return () => clearInterval(id)
-  }, [items.length, selectedVideo])
+  }, [items.length, isPaused, selectedVideo, next])
 
   if (items.length === 0) {
     return (
-      <section className="bg-white py-16 px-4 sm:px-6 lg:px-8 md:w-[150vh] md:mx-auto font-sans overflow-hidden">
+      <section className="overflow-hidden bg-white px-4 py-16 font-sans sm:px-6 lg:px-8">
         <VideoHeader />
         <p className="text-center text-sm text-slate-500">No videos yet.</p>
       </section>
     )
   }
 
-  const getItem = (offset: number) => items[(active + offset + items.length) % items.length]
-  const left = getItem(-1)
-  const center = getItem(0)
-  const right = getItem(1)
-
   return (
-    <section className="bg-white py-16 px-4 sm:px-6 lg:px-8 md:w-[150vh] md:mx-auto font-sans overflow-hidden">
-      <VideoHeader />
-
-      <div className="relative flex items-center justify-center gap-2 md:gap-4 min-h-[320px] md:min-h-[440px] [perspective:1400px]">
-        <CoverCard
-          item={left}
-          rotateY={18}
-          size="side"
-          onClick={() => setSelectedVideo(extractYoutubeId(left.youtube_id))}
-        />
-        <CoverCard
-          item={center}
-          rotateY={0}
-          size="center"
-          label
-          onClick={() => setSelectedVideo(extractYoutubeId(center.youtube_id))}
-        />
-        <CoverCard
-          item={right}
-          rotateY={-18}
-          size="side"
-          onClick={() => setSelectedVideo(extractYoutubeId(right.youtube_id))}
-        />
+    <section
+      className="relative overflow-hidden 
+       px-4 py-20 font-sans sm:px-6 lg:px-8"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      {/* Decorative perspective floor */}
+      <div className="pointer-events-none absolute inset-0 -z-10 opacity-40">
+        <div className="absolute left-1/2 top-1/2 h-[140%] w-[140%] -translate-x-1/2 -translate-y-[35%] rounded-[100%] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-uisb-purple/10 via-transparent to-transparent" />
       </div>
 
-      <div className="flex justify-center items-center gap-2 mt-8">
-        {items.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setActive(i)}
-            className={cn(
-              "h-2 rounded-full transition-all duration-500 ease-out",
-              i === active ? "w-6 bg-uisb-purple" : "w-2 bg-slate-300 hover:bg-slate-400",
-            )}
-            aria-label={`Go to slide ${i + 1}`}
-          />
-        ))}
+      <div className="mx-auto max-w-7xl">
+        <VideoHeader />
+
+        {/* 3D Perspective Stage */}
+        <div
+          className="relative mx-auto flex min-h-[420px] items-center justify-center "
+          style={{ perspective: "1200px" }}
+        >
+          <AnimatePresence mode="popLayout">
+            {items.map((item, index) => {
+              const id = item.id
+              const offset = index - active
+              const normalizedOffset =
+                offset > items.length / 2
+                  ? offset - items.length
+                  : offset < -items.length / 2
+                    ? offset + items.length
+                    : offset
+
+              const isCenter = normalizedOffset === 0
+              const isVisible = Math.abs(normalizedOffset) <= 2
+              if (!isVisible) return null
+
+              const abs = Math.abs(normalizedOffset)
+              const rotateY = normalizedOffset * -28
+              const translateX = normalizedOffset * (typeof window !== "undefined" && window.innerWidth < 768 ? 110 : 260)
+              const translateZ = -abs * 180
+              const scale = 1 - abs * 0.18
+              const opacity = 1 - abs * 0.35
+              const zIndex = items.length - abs
+
+              return (
+                <CarouselCard
+                  key={id}
+                  item={item}
+                  isCenter={isCenter}
+                  reduce={reduce}
+                  transform={{
+                    rotateY,
+                    translateX,
+                    translateZ,
+                    scale,
+                    opacity,
+                  }}
+                  zIndex={zIndex}
+                  onClick={() => setSelectedVideo(extractYoutubeId(item.youtube_id))}
+                  onPrev={prev}
+                  onNext={next}
+                />
+              )
+            })}
+          </AnimatePresence>
+        </div>
+
+        {/* Controls */}
+        <div className=" flex flex-col items-center gap-5">
+          {/* Navigation arrows */}
+          <div className="flex items-center gap-3">
+            <CarouselButton onClick={prev} aria-label="Previous video" direction="left" />
+            <CarouselButton onClick={next} aria-label="Next video" direction="right" />
+          </div>
+
+          {/* Current title */}
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={items[active].id}
+              initial={reduce ? undefined : { opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reduce ? undefined : { opacity: 0, y: -8 }}
+              transition={{ duration: 0.25 }}
+              className="max-w-xl text-center text-sm font-medium text-slate-600 md:text-base"
+            >
+              
+            </motion.p>
+          </AnimatePresence>
+        </div>
       </div>
 
+      {/* Modal */}
       <AnimatePresence>
         {selectedVideo && (
           <motion.div
             initial={reduce ? undefined : { opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={reduce ? undefined : { opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
             onClick={() => setSelectedVideo(null)}
           >
             <motion.div
-              initial={reduce ? undefined : { scale: 0.95, y: 12 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={reduce ? undefined : { scale: 0.96, y: 8 }}
-              transition={{ type: "spring", stiffness: 260, damping: 24 }}
+              initial={reduce ? undefined : { scale: 0.92, y: 20, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={reduce ? undefined : { scale: 0.96, y: 12, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 280, damping: 24 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-4xl bg-black rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10"
+              className="relative w-full max-w-5xl overflow-hidden rounded-2xl bg-black shadow-2xl ring-1 ring-white/10"
             >
               <button
                 onClick={() => setSelectedVideo(null)}
-                className="absolute top-3 right-3 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-black/60 text-white/90 transition-colors hover:bg-black/80 hover:text-white"
-                aria-label="Close Modal"
+                className="absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-black/70 text-white/90 transition-colors hover:bg-black/90 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                aria-label="Close video"
               >
-                <FaXmark className="h-4 w-4" aria-hidden />
+                <FaXmark className="h-5 w-5" aria-hidden />
               </button>
               <div className="relative aspect-video w-full">
                 <iframe
                   src={`https://www.youtube.com/embed/${selectedVideo}?autoplay=1`}
                   title="YouTube Video Player"
-                  className="w-full h-full"
+                  className="h-full w-full"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />
@@ -132,79 +184,141 @@ export default function VideoSection({ items }: { items: VideoItem[] }) {
 
 function VideoHeader() {
   return (
-    <Reveal direction="up" className="mb-12">
-      <span className="block text-xs font-bold uppercase tracking-[0.18em] text-uisb-purple mb-2">
+    <Reveal direction="up" className="mb-14 text-center">
+      <span className="mb-2 block text-xs font-bold uppercase tracking-[0.18em] text-uisb-purple">
         Media
       </span>
       <h2 className="font-heading text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
         UISB Highlights
       </h2>
-      <div className="mt-4 h-[2px] w-20 bg-amber-500" />
+      <div className="mx-auto mt-4 h-[2px] w-20 bg-amber-500" />
     </Reveal>
   )
 }
 
-function CoverCard({
-  item,
-  rotateY,
-  size,
-  label,
-  onClick,
-}: {
+interface CarouselCardProps {
   item: VideoItem
-  rotateY: number
-  size: "center" | "side"
-  label?: boolean
+  isCenter: boolean
+  reduce: boolean | null
+  transform: {
+    rotateY: number
+    translateX: number
+    translateZ: number
+    scale: number
+    opacity: number
+  }
+  zIndex: number
   onClick: () => void
-}) {
-  const reduce = useReducedMotion()
-  const isCenter = size === "center"
+  onPrev: () => void
+  onNext: () => void
+}
 
+function CarouselCard({ item, isCenter, reduce, transform, zIndex, onClick, onPrev, onNext }: CarouselCardProps) {
   return (
     <motion.button
+      layout
       type="button"
-      onClick={onClick}
-      initial={reduce ? false : { opacity: 0, y: 16, scale: isCenter ? 0.96 : 0.9 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ type: "spring", stiffness: 160, damping: 20, mass: 0.8 }}
-      whileHover={reduce ? undefined : { rotateY: 0, scale: 1.03 }}
+      onClick={() => (isCenter ? onClick() : transform.translateX < 0 ? onNext() : onPrev())}
+      initial={reduce ? false : { opacity: 0, scale: 0.8 }}
+      animate={{
+        opacity: transform.opacity,
+        scale: transform.scale,
+        x: transform.translateX,
+        y: 0,
+        rotateY: transform.rotateY,
+        z: transform.translateZ,
+      }}
+      exit={reduce ? undefined : { opacity: 0, scale: 0.8 }}
+      transition={{
+        type: "spring",
+        stiffness: 180,
+        damping: 22,
+        mass: 0.9,
+      }}
       style={{
         transformStyle: "preserve-3d",
-        transform: `rotateY(${isCenter ? 0 : rotateY}deg)`,
+        zIndex,
       }}
       className={cn(
-        "group relative shrink-0 overflow-hidden rounded-4xl bg-slate-900 shadow-xl will-change-transform",
-        "ring-1 ring-black/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-uisb-purple",
-        isCenter
-          ? "z-20 w-full max-w-[460px] aspect-[4/3] md:w-5/12"
-          : "hidden w-1/3 max-w-[300px] aspect-[4/3] md:block",
+        "group absolute aspect-[4/3] w-[78vw] max-w-[420px] cursor-pointer overflow-hidden bg-slate-900 shadow-2xl will-change-transform focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-uisb-purple focus-visible:ring-offset-4 md:w-[420px]",
+        isCenter ? "shadow-uisb-purple/20" : "shadow-black/20",
       )}
     >
+      {/* Reflection sheen */}
+      <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-tr from-white/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
       <Image
         src={item.thumbnail}
         alt={item.title}
         fill
-        sizes="(max-width: 768px) 90vw, 460px"
+        sizes="(max-width: 768px) 80vw, 420px"
         className="object-cover transition-transform duration-700 group-hover:scale-105"
+        priority={isCenter}
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
+      {/* Play button */}
       <span
         className={cn(
-          "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center rounded-full bg-white text-uisb-purple shadow-lg transition-transform duration-300 group-hover:scale-110",
-          isCenter ? "h-16 w-16" : "h-11 w-11",
+          "absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white text-uisb-purple shadow-lg transition-transform duration-300 group-hover:scale-110",
+          isCenter ? "h-18 w-18" : "h-14 w-14",
         )}
       >
-        <FaPlay className={cn(isCenter ? "ml-1 h-6 w-6" : "ml-0.5 h-4 w-4")} aria-hidden />
+        <FaPlay className={cn(isCenter ? "ml-1 h-7 w-7" : "ml-0.5 h-5 w-5")} aria-hidden />
       </span>
 
-      {label && isCenter && (
-        <div className="absolute inset-x-0 bottom-0 p-5 text-left">
-          <p className="line-clamp-1 text-base font-semibold text-white drop-shadow-sm">
-            {item.title}
-          </p>
-        </div>
-      )}
+      {/* Title on center card */}
+      <AnimatePresence>
+        {isCenter && (
+          <motion.div
+            initial={reduce ? undefined : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={reduce ? undefined : { opacity: 0, y: 8 }}
+            transition={{ delay: 0.1, duration: 0.3 }}
+            className="absolute inset-x-0 bottom-0 p-5 text-left"
+          >
+            <p className="line-clamp-2 text-base font-semibold text-white drop-shadow-md md:text-lg">
+              {item.title}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.button>
+  )
+}
+
+function CarouselButton({
+  onClick,
+  direction,
+  "aria-label": ariaLabel,
+}: {
+  onClick: () => void
+  direction: "left" | "right"
+  "aria-label": string
+}) {
+  return (
+    <button
+      onClick={onClick}
+      aria-label={ariaLabel}
+      className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition-all duration-200 hover:border-uisb-purple hover:text-uisb-purple hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-uisb-purple focus-visible:ring-offset-2 active:scale-95"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="h-5 w-5"
+        aria-hidden="true"
+      >
+        {direction === "left" ? (
+          <path d="m15 18-6-6 6-6" />
+        ) : (
+          <path d="m9 18 6-6-6-6" />
+        )}
+      </svg>
+    </button>
   )
 }

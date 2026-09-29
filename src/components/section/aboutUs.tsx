@@ -1,22 +1,33 @@
 import Image from "next/image"
 import { FaBookOpen, FaLightbulb } from "react-icons/fa6"
-import { CountUp, Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal"
+import {
+  CountUp,
+  Reveal,
+  RevealGroup,
+  RevealItem,
+} from "@/components/ui/reveal"
+import { Button } from "../ui/button"
+import { ArrowRightIcon } from "../ui/icons"
+import Link from "next/link"
 
 export default function AboutUs() {
   const features = [
     {
       title: "Regular Classes",
-      description: "It is a long established fact that reader will to using content.",
+      description:
+        "It is a long established fact that reader will to using content.",
       icon: <FaBookOpen className="h-6 w-6 text-amber-500" />,
     },
     {
       title: "Online Classes",
-      description: "It is a long established fact that reader will to using content.",
+      description:
+        "It is a long established fact that reader will to using content.",
       icon: <FaBookOpen className="h-6 w-6 text-amber-500" />,
     },
     {
       title: "Hybrid Classes",
-      description: "It is a long established fact that reader will to using content.",
+      description:
+        "It is a long established fact that reader will to using content.",
       icon: <FaBookOpen className="h-6 w-6 text-amber-500" />,
     },
   ]
@@ -75,7 +86,6 @@ export default function AboutUs() {
           delay={0.1}
           className="space-y-6 lg:col-span-6"
         >
-         
           <h2 className="text-3xl font-extrabold leading-tight text-slate-800 sm:text-4xl">
             Our Edukation System <br />
             <span className="text-fuchsia-500">Inspires</span> You More.
@@ -117,6 +127,15 @@ export default function AboutUs() {
                   &rdquo;&rdquo;
                 </div>
               </div>
+
+              <div className="flex pt-15">
+                <Button  iconRight={<ArrowRightIcon />}>
+                  <Link href="/information">
+                    Info Pendaftaran
+                  </Link>
+                </Button>
+              </div>
+
             </RevealItem>
           </RevealGroup>
         </Reveal>
