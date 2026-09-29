@@ -12,7 +12,7 @@ const ALLOWED_MIME_TYPES = [
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024 // 5MB
 
-const BUCKET_NAME = process.env.SUPABASE_STORAGE_BUCKET ?? "uisb-uploads"
+const BUCKET_NAME = process.env.SUPABASE_STORAGE_BUCKET ?? "uisb-bucket"
 
 function isProduction(): boolean {
   return process.env.NODE_ENV === "production" || process.env.VERCEL === "1"
