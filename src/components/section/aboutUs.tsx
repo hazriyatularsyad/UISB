@@ -75,10 +75,7 @@ export default function AboutUs() {
           delay={0.1}
           className="space-y-6 lg:col-span-6"
         >
-          <h2 className="text-3xl font-extrabold leading-tight text-slate-800 sm:text-5xl">
-            TOWARDS <span className="text-amber-500"> CAMPUS</span> BUSINESS
-            DIGITAL
-          </h2>
+         
           <h2 className="text-3xl font-extrabold leading-tight text-slate-800 sm:text-4xl">
             Our Edukation System <br />
             <span className="text-fuchsia-500">Inspires</span> You More.

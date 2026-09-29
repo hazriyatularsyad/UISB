@@ -168,6 +168,14 @@ export const HeroSection = ({
         </AnimatePresence>
         {/* Vignette bawah untuk kontras navbar & teks */}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+
+        {/* Tagline bottom-start di atas gambar hero */}
+        <div className="absolute bottom-8 left-4 z-10 max-w-xl md:bottom-12 md:left-10 lg:left-16">
+          <h1 className="text-3xl font-extrabold leading-tight text-white sm:text-5xl">
+            TOWARDS THE GLOBAL DIGITAL BUSINESS
+            <span className="text-amber-500"> UNIVERSITY</span>
+          </h1>
+        </div>
       </div>
 
       {/* Overlay children (mis. card informasi) — di atas gambar, di bawah navbar */}

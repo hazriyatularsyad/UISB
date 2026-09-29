@@ -19,8 +19,8 @@ const roboto = Roboto({
 })
 
 export const metadata: Metadata = {
-  title: "UISB",
-  description: "Toward Campus Business Digital",
+  title: "Universitas Islam Sumatra Barat (UISB)",
+  description: "Towards The Global Digital Business University",
   icons: { icon: "/images/favicon.png" },
 }
 
