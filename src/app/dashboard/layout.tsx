@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation"
 import DashboardSidebar from "@/components/dashboard/Sidebar"
 import ProfileMenu from "@/components/dashboard/ProfileMenu"
 import { getSessionUser } from "@/lib/auth"
@@ -8,6 +9,10 @@ export default async function DashboardLayout({
   children: React.ReactNode
 }) {
   const user = await getSessionUser()
+  if (!user) {
+    redirect("/login?from=/dashboard")
+  }
+
   return (
     <div className="flex min-h-screen bg-slate-50 text-slate-900 antialiased">
       <DashboardSidebar />

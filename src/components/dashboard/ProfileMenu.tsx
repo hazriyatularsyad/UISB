@@ -3,7 +3,6 @@
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 import { FaChevronDown, FaRightFromBracket, FaUpRightFromSquare, FaUserPlus } from "react-icons/fa6"
-import { logoutAction } from "@/app/login/actions"
 
 export default function ProfileMenu({ user }: { user: string | null }) {
   const [open, setOpen] = useState(false)
@@ -26,6 +25,24 @@ export default function ProfileMenu({ user }: { user: string | null }) {
       document.removeEventListener("keydown", onKey)
     }
   }, [open])
+
+  async function handleLogout(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    try {
+      const res = await fetch("/api/auth/logout", {
+        method: "POST",
+        credentials: "same-origin",
+      })
+      const data = await res.json()
+      if (data.redirect) {
+        window.location.href = data.redirect
+      } else {
+        window.location.href = "/login"
+      }
+    } catch {
+      window.location.href = "/login"
+    }
+  }
 
   return (
     <div ref={ref} className="fixed right-3 top-3 z-30">
@@ -84,7 +101,7 @@ export default function ProfileMenu({ user }: { user: string | null }) {
             <FaUpRightFromSquare className="h-3.5 w-3.5" aria-hidden />
             Back to site
           </Link>
-          <form action={logoutAction}>
+          <form onSubmit={handleLogout}>
             <button
               type="submit"
               role="menuitem"
