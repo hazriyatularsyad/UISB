@@ -53,7 +53,7 @@ export default function VideoSection({ items }: { items: VideoItem[] }) {
   return (
     <section
       className="relative overflow-hidden 
-       px-4 py-20 font-sans sm:px-6 lg:px-8"
+        py-15 font-sans sm:px-6 lg:px-8"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >

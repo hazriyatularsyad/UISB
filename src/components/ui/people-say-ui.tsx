@@ -130,7 +130,7 @@ export const TestimonialCard = ({
   backgroundImage?: string
 }) => (
   <div className="select-none touch-pan-x">
-    <div className="relative z-10 flex h-[500px] w-80 shrink-0 select-none flex-col items-center justify-center overflow-hidden rounded-3xl bg-slate-100 shadow-md md:h-[550px] md:w-96">
+    <div className="relative z-10 flex h-[450px] w-75 shrink-0 select-none flex-col items-center justify-center overflow-hidden rounded-3xl bg-slate-100 shadow-md md:h-[550px] md:w-96">
       <Image
         src={backgroundImage}
         alt="Card background"
@@ -139,10 +139,10 @@ export const TestimonialCard = ({
         className="pointer-events-none absolute inset-0 -z-10 object-cover"
       />
       <ProfileImage src={testimonial.profileImage} alt={testimonial.name} />
-      <p className="relative z-10 mt-4 px-4 text-center text-xl font-normal text-slate-800">
+      <p className="relative z-10 mt-4 px-4 text-center text-base md:text-xl font-normal text-slate-800">
         {truncate(testimonial.description, 100)}
       </p>
-      <p className="relative z-10 mt-5 text-center text-lg font-medium text-slate-900 md:text-xl">
+      <p className="relative z-10 mt-5 text-center text-base font-medium text-slate-900 md:text-xl">
         {testimonial.name}.
       </p>
       <p className="relative z-10 mt-1 text-center text-sm font-normal text-slate-600 underline decoration-1 underline-offset-8">
