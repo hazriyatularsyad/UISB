@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { FaBookOpen, FaLightbulb } from "react-icons/fa6"
+import { FaBookOpen, FaGlobe, FaLaptop, FaLightbulb } from "react-icons/fa6"
 import {
   CountUp,
   Reveal,
@@ -22,13 +22,13 @@ export default function AboutUs() {
       title: "Online Classes",
       description:
         "It is a long established fact that reader will to using content.",
-      icon: <FaBookOpen className="h-6 w-6 text-amber-500" />,
+      icon: <FaGlobe className="h-6 w-6 text-amber-500" />,
     },
     {
       title: "Hybrid Classes",
       description:
         "It is a long established fact that reader will to using content.",
-      icon: <FaBookOpen className="h-6 w-6 text-amber-500" />,
+      icon: <FaLaptop className="h-6 w-6 text-amber-500" />,
     },
   ]
 
@@ -42,7 +42,7 @@ export default function AboutUs() {
           <div className="space-y-4">
             <div className="relative h-[320px] overflow-hidden rounded-[80px_80px_0_80px] shadow-sm">
               <Image
-                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop"
+                src="/images/reguler.jpeg"
                 alt="Woman reading book"
                 fill
                 sizes="(max-width: 1024px) 45vw, 25vw"
@@ -62,7 +62,7 @@ export default function AboutUs() {
           <div className="space-y-4 pt-4">
             <div className="relative h-[200px] overflow-hidden rounded-[80px_80px_0_80px] shadow-sm">
               <Image
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop"
+                src="/images/hybrid.jpeg"
                 alt="Students studying"
                 fill
                 sizes="(max-width: 1024px) 45vw, 25vw"
@@ -71,11 +71,11 @@ export default function AboutUs() {
             </div>
             <div className="relative h-[260px] overflow-hidden rounded-[0_80px_80px_80px] shadow-sm">
               <Image
-                src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop"
+                src="/images/online.jpeg"
                 alt="Teacher helping student"
                 fill
                 sizes="(max-width: 1024px) 45vw, 25vw"
-                className="object-cover"
+                className="object-cover "
               />
             </div>
           </div>
@@ -128,13 +128,13 @@ export default function AboutUs() {
                 </div>
               </div>
 
-              <div className="flex pt-15">
+              {/* <div className="flex pt-15">
                 <Button  iconRight={<ArrowRightIcon />}>
                   <Link href="/information">
                     Info Pendaftaran
                   </Link>
                 </Button>
-              </div>
+              </div> */}
 
             </RevealItem>
           </RevealGroup>

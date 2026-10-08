@@ -4,6 +4,8 @@ import { siteData } from "@/data/site"
 import { listPrograms } from "@/lib/data-store"
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal"
 
+export const dynamic = 'force-dynamic'
+
 export default async function AcademicsSection() {
   const { academics } = siteData
   const programs = await listPrograms()

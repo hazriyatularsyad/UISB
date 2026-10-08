@@ -2,6 +2,7 @@ import { listAchievements } from "@/lib/data-store"
 import AchievementCards from "./achievement-cards"
 import { Reveal } from "@/components/ui/reveal"
 
+export const dynamic = 'force-dynamic'
 
 export default async function Achievement() {
   const achievements = await listAchievements()
