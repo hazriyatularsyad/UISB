@@ -1,5 +1,3 @@
-import { writeFile, mkdir } from "node:fs/promises"
-import { join } from "node:path"
 import { getSupabaseAdmin } from "./supabase"
 
 const ALLOWED_MIME_TYPES = [
@@ -15,7 +13,8 @@ const MAX_FILE_SIZE = 5 * 1024 * 1024 // 5MB
 const BUCKET_NAME = process.env.SUPABASE_STORAGE_BUCKET ?? "uisb-bucket"
 
 function isProduction(): boolean {
-  return process.env.NODE_ENV === "production" || process.env.VERCEL === "1"
+  // Always use Supabase Storage for uploads
+  return true
 }
 
 function generateFileName(file: File): string {
@@ -38,19 +37,7 @@ function validateFile(file: File): void {
   }
 }
 
-async function saveToLocal(file: File, folder: string): Promise<string> {
-  const bytes = await file.arrayBuffer()
-  const buffer = Buffer.from(bytes)
 
-  const uploadDir = join(process.cwd(), "public", folder)
-  await mkdir(uploadDir, { recursive: true })
-
-  const fileName = generateFileName(file)
-  const filePath = join(uploadDir, fileName)
-
-  await writeFile(filePath, buffer)
-  return `/${folder}/${fileName}`
-}
 
 async function saveToSupabase(file: File, folder: string): Promise<string> {
   const supabase = getSupabaseAdmin()
@@ -82,32 +69,16 @@ export async function saveUploadedFile(
 
   validateFile(file)
 
-  if (isProduction()) {
-    return await saveToSupabase(file, folder)
-  }
-
-  return await saveToLocal(file, folder)
+  return await saveToSupabase(file, folder)
 }
 
 export async function deleteUploadedFile(url: string): Promise<void> {
   if (!url) return
 
-  if (isProduction()) {
-    const supabase = getSupabaseAdmin()
-    const bucketUrl = supabase.storage.from(BUCKET_NAME).getPublicUrl("").data.publicUrl
-    if (url.startsWith(bucketUrl)) {
-      const path = url.replace(bucketUrl, "")
-      await supabase.storage.from(BUCKET_NAME).remove([path])
-    }
-    return
-  }
-
-  // Local: best effort delete
-  try {
-    const { unlink } = await import("node:fs/promises")
-    const localPath = url.startsWith("/") ? url.slice(1) : url
-    await unlink(join(process.cwd(), "public", localPath))
-  } catch {
-    // ignore local delete errors
+  const supabase = getSupabaseAdmin()
+  const bucketUrl = supabase.storage.from(BUCKET_NAME).getPublicUrl("").data.publicUrl
+  if (url.startsWith(bucketUrl)) {
+    const path = url.replace(bucketUrl, "")
+    await supabase.storage.from(BUCKET_NAME).remove([path])
   }
 }

@@ -33,6 +33,9 @@ export const Carousel = ({ items }: iCarouselProps) => {
   const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
   const reduce = useReducedMotion()
+  const dragStartX = useRef(0)
+  const scrollLeftStart = useRef(0)
+  const isDragging = useRef(false)
 
   const getCards = () =>
     Array.from(ref.current?.querySelectorAll<HTMLElement>("[data-card]") ?? [])
@@ -85,10 +88,30 @@ export const Carousel = ({ items }: iCarouselProps) => {
         onScroll={check}
         onPointerEnter={() => setPaused(true)}
         onPointerLeave={() => setPaused(false)}
-        onPointerDown={() => setPaused(true)}
-        onPointerUp={() => setPaused(false)}
-        onPointerCancel={() => setPaused(false)}
-        style={{ touchAction: "manipulation", WebkitOverflowScrolling: "touch" }}
+        onPointerDown={(e) => {
+          setPaused(true)
+          if (!ref.current) return
+          dragStartX.current = e.clientX
+          scrollLeftStart.current = ref.current.scrollLeft
+          isDragging.current = true
+        }}
+        onPointerMove={(e) => {
+          if (!isDragging.current) return
+          if (!ref.current) return
+          const dx = e.clientX - dragStartX.current
+          // Optionally ignore vertical drag: if vertical movement > horizontal, do nothing?
+          // For simplicity, we just handle horizontal.
+          ref.current.scrollLeft = scrollLeftStart.current - dx
+        }}
+        onPointerUp={() => {
+          setPaused(false)
+          isDragging.current = false
+        }}
+        onPointerCancel={() => {
+          setPaused(false)
+          isDragging.current = false
+        }}
+        style={{ touchAction: "pan-y", WebkitOverflowScrolling: "touch" }}
         className="flex w-full snap-x snap-mandatory overflow-x-scroll overscroll-x-contain py-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         <div className="mx-auto flex max-w-5xl flex-row justify-start gap-4 px-3 md:px-0">

@@ -11,8 +11,8 @@ export function createGenericCrud<EntityType>(
   tableName: string,
   columns: ColumnMapper<EntityType>,
   options: {
-    idColumn: keyof EntityType & string;
-    sortOrderColumn: keyof EntityType & string;
+    idColumn?: keyof EntityType & string;
+    sortOrderColumn?: keyof EntityType & string;
     listOrderBy?: string;
     adminOrderBy?: string;
     revalidatePaths?: string[];
