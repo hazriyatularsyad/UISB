@@ -5,6 +5,7 @@ import Image from "next/image"
 import { motion, AnimatePresence, useReducedMotion } from "motion/react"
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6"
 import { cn } from "@/lib/utils"
+import { getSupabaseImageUrl } from "@/lib/image-utils"
 import type { AchievementItem } from "@/lib/data-store"
 
 function useIsMobile() {
@@ -81,7 +82,7 @@ function MobileStack({
           className="absolute inset-0 translate-y-3 scale-[0.94] overflow-hidden rounded-2xl border border-slate-200 bg-white opacity-70 shadow-sm"
         >
           <div className="h-[290px] w-full overflow-hidden">
-            <Image src={behind.image} alt="" fill sizes="(max-width: 768px) 90vw, 400px" className="object-cover" draggable={false} />
+             <Image src={getSupabaseImageUrl(behind.image)} alt="" fill sizes="(max-width: 768px) 90vw, 400px" className="object-cover" draggable={false} />
           </div>
         </div>
 
@@ -110,7 +111,7 @@ function MobileStack({
             style={{ touchAction: "pan-y" }}
           >
             <div className="relative h-[290px] w-full overflow-hidden rounded-xl">
-              <Image src={current.image} alt={current.title} fill sizes="(max-width: 768px) 90vw, 400px" className="object-cover" draggable={false} />
+               <Image src={getSupabaseImageUrl(current.image)} alt={current.title} fill sizes="(max-width: 768px) 90vw, 400px" className="object-cover" draggable={false} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
             </div>
             <h3 className="mt-5 text-lg font-semibold leading-snug text-slate-900">{current.title}</h3>
@@ -208,7 +209,7 @@ function DesktopRow({
           <div key={item.id} data-card className="w-[calc(33.333%-1rem)] shrink-0">
             <div className="flex h-full flex-col overflow-hidden rounded-2xl border bg-white p-6 shadow-sm transition-all duration-300 hover:border-amber-500/60 hover:-translate-y-0.5">
               <div className="relative mb-4 h-80 w-full overflow-hidden rounded-xl">
-                <Image src={item.image} alt={item.title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
+                 <Image src={getSupabaseImageUrl(item.image)} alt={item.title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
               </div>
               <h3 className="text-lg font-semibold leading-snug text-slate-800">{item.title}</h3>

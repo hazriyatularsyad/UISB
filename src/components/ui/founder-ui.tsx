@@ -5,6 +5,7 @@ import Image from "next/image"
 import { motion } from "motion/react"
 import type { HTMLAttributes, MouseEvent, KeyboardEvent } from "react"
 import { cn } from "@/lib/utils"
+import { getSupabaseImageUrl } from "@/lib/image-utils"
 
 export interface CarouselItem {
   id: string | number
@@ -524,15 +525,15 @@ export function CalendlyCarousel({
                   )}
                 >
                   <div className="size-full rounded-[20px] sm:rounded-[24px] overflow-hidden bg-muted relative">
-                    <Image
-                      alt={item.alt || item.author}
-                      src={item.defaultImage}
-                      fill
-                      unoptimized
-                      draggable={false}
-                      style={{ objectFit: "cover" }}
-                      className="size-full object-cover"
-                    />
+                     <Image
+                       alt={item.alt || item.author}
+                       src={getSupabaseImageUrl(item.defaultImage)}
+                       fill
+                       unoptimized
+                       draggable={false}
+                       style={{ objectFit: "cover" }}
+                       className="size-full object-cover"
+                     />
                   </div>
                 </motion.div>
 
@@ -612,15 +613,15 @@ export function CalendlyCarousel({
                     </div>
 
                     <div className="relative shrink-0 overflow-hidden rounded-[18px] sm:rounded-[22px] bg-muted w-full md:w-[clamp(180px,44%,330px)] flex-1 md:flex-initial md:h-full max-h-[220px] md:max-h-none">
-                      <Image
-                        alt={item.alt || item.author}
-                        src={item.selectedImage}
-                        fill
-                        unoptimized
-                        draggable={false}
-                        style={{ objectFit: "cover" }}
-                        className="size-full object-cover"
-                      />
+                       <Image
+                         alt={item.alt || item.author}
+                         src={getSupabaseImageUrl(item.selectedImage)}
+                         fill
+                         unoptimized
+                         draggable={false}
+                         style={{ objectFit: "cover" }}
+                         className="size-full object-cover"
+                       />
                     </div>
                   </motion.div>
                 </div>

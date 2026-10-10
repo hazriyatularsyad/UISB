@@ -32,6 +32,9 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  turbopack: {
+    root: process.cwd(),
+  },
   poweredByHeader: false,
   async headers() {
     return [

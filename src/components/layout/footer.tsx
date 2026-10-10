@@ -9,6 +9,7 @@ import {
   FaYoutube,
 } from "react-icons/fa6"
 import { siteData } from "@/data/site"
+import Link from "next/link"
 
 const socialLinks = [
   {
@@ -132,8 +133,10 @@ export default function Footer() {
           <p className="text-gray-300">Jln. Bypass Padang, Sumatra Barat</p>
           <p className="text-gray-300">Email: salam@uisb.ac.id</p>
           <p className="text-gray-300">+62 8116655515 </p>
-          <a
+          <Link
             href="/dashboard"
+            target="_blank"
+            rel="noopener noreferrer"
             aria-label="admin dashboard"
             className="group relative inline-flex shrink-0 items-center justify-between gap-4 overflow-hidden rounded-full bg-[#FF5500] py-1.5 pl-5 pr-1.5 font-heading text-sm font-semibold text-white shadow-md motion-safe:transition-colors duration-500 ease-out hover:text-[#FF5500]"
           >
@@ -144,7 +147,7 @@ export default function Footer() {
             <span className="relative z-10 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white motion-safe:transition-transform duration-300 group-hover:translate-x-0.5">
               <FaArrowRight className="h-3.5 w-3.5 text-[#FF5500]" />
             </span>
-          </a>
+          </Link>
         </div>
       </div>
       <div className="mt-8 border-t border-white/10 pt-8 text-center text-sm text-gray-400 sm:mt-10 sm:pt-10">

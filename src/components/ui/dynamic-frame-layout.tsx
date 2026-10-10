@@ -4,6 +4,7 @@ import { useState } from "react"
 import Image from "next/image"
 import { motion } from "motion/react"
 import { cn } from "@/lib/utils"
+import { getSupabaseImageUrl } from "@/lib/image-utils"
 
 export interface Frame {
   id: number
@@ -36,14 +37,14 @@ function FrameComponent({
       }}
     >
       <div className="relative h-full w-full overflow-hidden">
-        <Image
-          src={image}
-          alt=""
-          fill
-          sizes="33vw"
-          className="scale-105 object-cover transition-transform duration-700 ease-out will-change-transform"
-          style={{ transform: isHovered ? "scale(1.08)" : "scale(1.05)" }}
-        />
+         <Image
+           src={getSupabaseImageUrl(image)}
+           alt=""
+           fill
+           sizes="33vw"
+           className="scale-105 object-cover transition-transform duration-700 ease-out will-change-transform"
+           style={{ transform: isHovered ? "scale(1.08)" : "scale(1.05)" }}
+         />
         <div
           className="pointer-events-none absolute inset-0 transition-opacity duration-500"
           style={{

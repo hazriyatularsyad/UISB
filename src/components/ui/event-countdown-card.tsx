@@ -6,6 +6,7 @@ import { motion, useReducedMotion } from "motion/react"
 import { buttonVariants } from "@/components/ui/button"
 import { Clock } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { getSupabaseImageUrl } from "@/lib/image-utils"
 
 interface EventCountdownCardProps {
   title?: string
@@ -73,14 +74,14 @@ export function EventCountdownCard({
         className,
       )}
     >
-      {/* Background image fills the entire card */}
-      <Image
-        src={image ?? "/images/hero-mobile.webp"}
-        alt={title ?? "Event"}
-        fill
-        sizes="(max-width: 768px) 92vw, 360px"
-        className="absolute inset-0 z-0 object-cover transition-transform duration-500 group-hover:scale-110"
-      />
+       {/* Background image fills the entire card */}
+       <Image
+         src={getSupabaseImageUrl(image) ?? "/images/hero-mobile.webp"}
+         alt={title ?? "Event"}
+         fill
+         sizes="(max-width: 768px) 92vw, 360px"
+         className="absolute inset-0 z-0 object-cover transition-transform duration-500 group-hover:scale-110"
+       />
       {/* Light gradient 10 so image stays visible */}
       <div className="absolute inset-0 z-0 bg-gradient-to-t from-black/10 via-transparent to-transparent" />
 

@@ -5,6 +5,7 @@ import Image from "next/image"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { getSupabaseImageUrl } from "@/lib/image-utils"
 import type { PopupItem } from "@/lib/data-store"
 
 export const AUTO_SLIDE_INTERVAL_MS = 5000
@@ -97,14 +98,14 @@ export default function PmbHeroCard({ items }: { items: PopupItem[] }) {
             "border border-border/50 shadow-lg shadow-black/5",
           )}
         >
-          {/* Background image fills the entire card */}
-          <Image
-            src={current.image || "/images/hero-mobile.webp"}
-            alt={current.title || "Informasi PMB"}
-            fill
-            sizes="360px"
-            className="absolute inset-0 z-0 object-cover transition-transform duration-500 group-hover:scale-110"
-          />
+           {/* Background image fills the entire card */}
+           <Image
+             src={getSupabaseImageUrl(current.image) || "/images/hero-mobile.webp"}
+             alt={current.title || "Informasi PMB"}
+             fill
+             sizes="360px"
+             className="absolute inset-0 z-0 object-cover transition-transform duration-500 group-hover:scale-110"
+           />
           {/* Light gradient so image stays visible */}
           <div className="absolute inset-0 z-0 bg-gradient-to-t from-black/10 via-transparent to-transparent" />
 

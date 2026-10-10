@@ -3,6 +3,7 @@ import Image from "next/image"
 import { siteData } from "@/data/site"
 import { listPrograms } from "@/lib/data-store"
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal"
+import { getSupabaseImageUrl } from "@/lib/image-utils"
 
 export const dynamic = 'force-dynamic'
 
@@ -60,13 +61,13 @@ export default async function AcademicsSection() {
                 className="group flex h-full cursor-pointer flex-col overflow-hidden rounded-md border border-amber-700 bg-white shadow-sm transition-shadow duration-300 hover:shadow-md"
               >
                 <div className="relative h-60 overflow-hidden">
-                  <Image
-                    src={program.image}
-                    alt={program.title}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
+                 <Image
+                     src={getSupabaseImageUrl(program.image)}
+                     alt={program.title}
+                     fill
+                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
+                     className="object-cover transition-transform duration-300 group-hover:scale-105"
+                   />
                 </div>
                 <div className="flex flex-1 items-center justify-center bg-amber-600 p-4">
                   <h3 className="text-center font-serif text-s text-white transition-colors group-hover:text-slate-200">

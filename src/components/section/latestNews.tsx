@@ -2,6 +2,7 @@ import Image from "next/image"
 import { FaChevronRight } from "react-icons/fa6"
 import { listNews, type NewsItem } from "@/lib/data-store"
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal"
+import { getSupabaseImageUrl } from "@/lib/image-utils"
 
 function NewsCard({
   news,
@@ -21,13 +22,13 @@ function NewsCard({
     >
       {featured ? (
         <>
-          <Image
-            src={news.image}
-            alt={news.title}
-            fill
-            sizes="(max-width: 768px) 100vw, 66vw"
-            className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
-          />
+           <Image
+             src={getSupabaseImageUrl(news.image)}
+             alt={news.title}
+             fill
+             sizes="(max-width: 768px) 100vw, 66vw"
+             className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
+           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 p-6 text-white sm:p-8">
             <span className="mb-2 block text-s font-medium text-slate-300">
@@ -44,13 +45,13 @@ function NewsCard({
       ) : (
         <>
           <div className="relative mb-3 h-[270px] w-full shrink-0 overflow-hidden rounded-xl bg-slate-100">
-            <Image
-              src={news.image}
-              alt={news.title}
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
-            />
+             <Image
+               src={getSupabaseImageUrl(news.image)}
+               alt={news.title}
+               fill
+               sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+               className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
+             />
           </div>
           <span className="mb-1.5 block text-xs text-slate-400">
             {news.date}
@@ -103,13 +104,13 @@ export default async function LatestNews() {
             <Reveal direction="up" duration={0.6}>
               <a href={first.link} className="group block">
                 <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-slate-100">
-                  <Image
-                    src={first.image}
-                    alt={first.title}
-                    fill
-                    sizes="(max-width: 640px) 100vw"
-                    className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
-                  />
+                   <Image
+                     src={getSupabaseImageUrl(first.image)}
+                     alt={first.title}
+                     fill
+                     sizes="(max-width: 640px) 100vw"
+                     className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                   />
                 </div>
                 <h3 className="mt-3 text-xl font-bold leading-snug text-slate-900">
                   {first.title}
@@ -129,13 +130,13 @@ export default async function LatestNews() {
               <RevealItem key={news.id} index={i} direction="up" stagger={0.1}>
                 <a href={news.link} className="group flex gap-3">
                   <div className="relative aspect-[4/3] w-28 shrink-0 overflow-hidden rounded-lg bg-slate-100">
-                    <Image
-                      src={news.image}
-                      alt={news.title}
-                      fill
-                      sizes="112px"
-                      className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
-                    />
+                       <Image
+                         src={getSupabaseImageUrl(news.image)}
+                         alt={news.title}
+                         fill
+                         sizes="112px"
+                         className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                       />
                   </div>
                   <div className="min-w-0 flex-1">
                     <h3 className="text-base font-bold leading-snug text-slate-900 line-clamp-3">

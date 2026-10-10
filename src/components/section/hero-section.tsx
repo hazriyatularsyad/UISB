@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence, useReducedMotion } from "motion/react"
 import { cn } from "@/lib/utils"
+import { getSupabaseImageUrl } from "@/lib/image-utils"
 import { heroSlides } from "@/data/site"
 import type { HeroSlideItem } from "@/lib/data-store"
 
@@ -143,27 +144,27 @@ export const HeroSection = ({
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }} // crossfade lambat 1.2s
             className="absolute inset-0"
           >
-            {/* Gambar desktop */}
-            <Image
-              src={currentDesktop.image}
-              alt={currentDesktop.title || imageAlt}
-              fill
-              sizes="100vw"
-              loading="eager"
-              className="hidden object-cover md:block"
-              onError={onImgError}
-            />
-            {/* Gambar mobile (variant khusus) — LCP */}
-            <Image
-              src={currentMobile.image}
-              alt={currentMobile.title || imageAlt}
-              fill
-              sizes="100vw"
-              priority
-              fetchPriority="high"
-              className="block object-cover object-[50%_35%] md:hidden"
-              onError={onImgError}
-            />
+             {/* Gambar desktop */}
+             <Image
+               src={getSupabaseImageUrl(currentDesktop.image)}
+               alt={currentDesktop.title || imageAlt}
+               fill
+               sizes="100vw"
+               loading="eager"
+               className="hidden object-cover md:block"
+               onError={onImgError}
+             />
+             {/* Gambar mobile (variant khusus) — LCP */}
+             <Image
+               src={getSupabaseImageUrl(currentMobile.image)}
+               alt={currentMobile.title || imageAlt}
+               fill
+               sizes="100vw"
+               priority
+               fetchPriority="high"
+               className="block object-cover object-[50%_35%] md:hidden"
+               onError={onImgError}
+             />
           </motion.div>
         </AnimatePresence>
         {/* Vignette bawah untuk kontras navbar & teks */}

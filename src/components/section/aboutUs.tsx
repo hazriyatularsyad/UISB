@@ -128,14 +128,21 @@ export default function AboutUs() {
                 </div>
               </div>
 
-              {/* <div className="flex pt-15">
-                <Button  iconRight={<ArrowRightIcon />}>
-                  <Link href="/information">
-                    Info Pendaftaran
-                  </Link>
+              <div className="flex pt-15 md:w-1/2 w-full gap-5">
+                <Link
+                  href="/information"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full"
+                >
+                  <Button className="w-full justify-center bg-uisb-purple text-white hover:bg-uisb-purple/90">
+                    Brosur
+                  </Button>
+                </Link>
+                <Button className="w-full justify-center  bg-uisb-purple text-white hover:bg-uisb-purple/90">
+                  <Link href="/information">Info Pendaftaran</Link>
                 </Button>
-              </div> */}
-
+              </div>
             </RevealItem>
           </RevealGroup>
         </Reveal>
