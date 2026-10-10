@@ -7,9 +7,16 @@ const nextConfig: NextConfig = {
       bodySizeLimit: "10mb",
     },
     optimizePackageImports: ["react-icons", "motion", "lucide-react"],
+    optimizeCss: false,
   },
   images: {
     remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "kpzfphmcjpovylxidxvz.supabase.co",
+        port: "",
+        pathname: "/storage/v1/object/public/**",
+      },
       {
         protocol: "https",
         hostname: "cdn.21st.dev",
@@ -25,10 +32,6 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "img.youtube.com",
-      },
-      {
-        protocol: "https",
-        hostname: "*.supabase.co",
       },
     ],
   },
