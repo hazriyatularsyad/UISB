@@ -133,7 +133,7 @@ export default function VideoSection({ items }: { items: VideoItem[] }) {
               initial={reduce ? undefined : { opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={reduce ? undefined : { opacity: 0, y: -8 }}
-              transition={{ duration: 0.25 }}
+              transition={{ duration: 0.8, delay: 1, ease: [0.22, 1, 0.36, 1] }}
               className="max-w-xl text-center text-sm font-medium text-slate-600 md:text-base"
             >
               
@@ -149,6 +149,7 @@ export default function VideoSection({ items }: { items: VideoItem[] }) {
             initial={reduce ? undefined : { opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={reduce ? undefined : { opacity: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
             onClick={() => setSelectedVideo(null)}
           >
@@ -156,7 +157,7 @@ export default function VideoSection({ items }: { items: VideoItem[] }) {
               initial={reduce ? undefined : { scale: 0.92, y: 20, opacity: 0 }}
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={reduce ? undefined : { scale: 0.96, y: 12, opacity: 0 }}
-              transition={{ type: "spring", stiffness: 280, damping: 24 }}
+              transition={{ type: "spring", stiffness: 200, damping: 25 }}
               onClick={(e) => e.stopPropagation()}
               className="relative w-full max-w-5xl overflow-hidden rounded-2xl bg-black shadow-2xl ring-1 ring-white/10"
             >
@@ -233,8 +234,8 @@ function CarouselCard({ item, isCenter, reduce, transform, zIndex, onClick, onPr
       exit={reduce ? undefined : { opacity: 0, scale: 0.8 }}
       transition={{
         type: "spring",
-        stiffness: 180,
-        damping: 22,
+        stiffness: 120,
+        damping: 18,
         mass: 0.9,
       }}
       style={{
@@ -272,14 +273,14 @@ function CarouselCard({ item, isCenter, reduce, transform, zIndex, onClick, onPr
 
       {/* Title on center card */}
       <AnimatePresence>
-        {isCenter && (
-          <motion.div
-            initial={reduce ? undefined : { opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={reduce ? undefined : { opacity: 0, y: 8 }}
-            transition={{ delay: 0.1, duration: 0.3 }}
-            className="absolute inset-x-0 bottom-0 p-5 text-left"
-          >
+{isCenter && (
+            <motion.div
+              initial={reduce ? undefined : { opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reduce ? undefined : { opacity: 0, y: 8 }}
+              transition={{ delay: 1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute inset-x-0 bottom-0 p-5 text-left"
+            >
             <p className="line-clamp-2 text-base font-semibold text-white drop-shadow-md md:text-lg">
               {item.title}
             </p>

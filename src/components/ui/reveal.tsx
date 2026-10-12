@@ -31,11 +31,13 @@ interface RevealProps {
   as?: "div" | "section" | "span" | "li"
 }
 
+const ENTRANCE_TRANSITION = { duration: 1, delay: 1, ease: [0.22, 1, 0.36, 1] as const }
+
 export function Reveal({
   children,
   direction = "up",
-  delay = 0,
-  duration = 0.6,
+  delay = 1,
+  duration = 1,
   amount = 0.2,
   once = true,
   className,
@@ -55,7 +57,7 @@ export function Reveal({
       initial={{ opacity: 0, x, y }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
       viewport={{ once, amount }}
-      transition={{ duration, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={ENTRANCE_TRANSITION}
       className={className}
     >
       {children}
@@ -89,8 +91,8 @@ export function RevealItem({
   index = 0,
   direction = "up",
   stagger = 0.08,
-  baseDelay = 0,
-  duration = 0.55,
+  baseDelay = 1,
+  duration = 1,
   amount = 0.2,
   once = true,
   className,

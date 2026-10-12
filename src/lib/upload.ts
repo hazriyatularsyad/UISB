@@ -8,7 +8,7 @@ const ALLOWED_MIME_TYPES = [
   "image/svg+xml",
 ] as const
 
-const MAX_FILE_SIZE = 5 * 1024 * 1024 // 5MB
+const MAX_FILE_SIZE = 20 * 1024 * 1024 // 20MB
 
 const BUCKET_NAME = process.env.SUPABASE_STORAGE_BUCKET ?? "uisb-bucket"
 

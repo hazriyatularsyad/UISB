@@ -32,7 +32,7 @@ export default function DosenAccordion({ items }: { items: DosenItem[] }) {
           key={active.id + "-title"}
           initial={reduce ? false : { opacity: 0, y: 8 }}
           animate={reduce ? undefined : { opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1, delay: 1, ease: [0.22, 1, 0.36, 1] }}
           className="font-heading text-2xl md:text-3xl text-slate-900 leading-tight tracking-tight mb-2"
         >
           {active.name}
@@ -42,7 +42,7 @@ export default function DosenAccordion({ items }: { items: DosenItem[] }) {
           key={active.id + "-desc"}
           initial={reduce ? false : { opacity: 0, y: 8 }}
           animate={reduce ? undefined : { opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
           className="text-slate-600 text-sm md:text-base leading-relaxed"
         >
           <span className="text-uisb-purple text-xl font-semibold mb-2">
@@ -105,7 +105,7 @@ export default function DosenAccordion({ items }: { items: DosenItem[] }) {
                     key={item.id + "-active-label"}
                     initial={reduce ? false : { opacity: 0, y: 6 }}
                     animate={reduce ? undefined : { opacity: 1, y: 0 }}
-                    transition={{ duration: 0.25 }}
+                    transition={{ duration: 0.8, delay: 1, ease: [0.22, 1, 0.36, 1] }}
                     className="text-white text-sm font-semibold tracking-wide text-center drop-shadow-md"
                   >
                     {item.name}

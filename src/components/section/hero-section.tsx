@@ -171,12 +171,17 @@ export const HeroSection = ({
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
         {/* Tagline bottom-start di atas gambar hero */}
-        <div className="absolute bottom-8 left-4 z-10 max-w-xl md:bottom-12 md:left-10 lg:left-16">
+        <motion.div
+          initial={{ opacity: 0, x: -60 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 3, delay: 1, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute bottom-8 left-4 z-10 max-w-xl md:bottom-12 md:left-10 lg:left-16"
+        >
           <h1 className="text-3xl font-extrabold leading-tight text-white sm:text-5xl">
             TOWARDS THE GLOBAL DIGITAL BUSINESS
             <span className="text-amber-500"> UNIVERSITY</span>
           </h1>
-        </div>
+        </motion.div>
       </div>
 
       {/* Overlay children (mis. card informasi) — di atas gambar, di bawah navbar */}

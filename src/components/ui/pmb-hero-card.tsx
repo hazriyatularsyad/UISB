@@ -81,7 +81,7 @@ export default function PmbHeroCard({ items }: { items: PopupItem[] }) {
       onBlurCapture={release}
       initial={reduce ? false : { opacity: 0, x: 100 }}
       animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 1, delay: 1, ease: [0.22, 1, 0.36, 1] }}
       className="absolute right-1 top-1/2 z-40 hidden w-97 -translate-y-1/2 md:block mr-15"
     >
       <AnimatePresence mode="wait" initial={false}>
@@ -92,7 +92,7 @@ export default function PmbHeroCard({ items }: { items: PopupItem[] }) {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={reduce ? undefined : { opacity: 0, scale: 0.98, y: -8 }}
           whileHover={reduce ? undefined : { scale: 1.03, y: -6 }}
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          transition={{ type: "spring", stiffness: 200, damping: 25 }}
           className={cn(
             "relative w-full h-150 rounded-2xl overflow-hidden cursor-pointer group",
             "border border-border/50 shadow-lg shadow-black/5",
