@@ -55,7 +55,8 @@ export async function updateNews(id: number, input: NewsInput): Promise<NewsItem
 }
 
 export async function deleteNews(id: number): Promise<void> {
-  await executeDelete("news", id, "id", standardRevalidatePaths("news"));
+  const news = await getNews(id)
+  await executeDelete("news", id, "id", standardRevalidatePaths("news"), news?.image);
 }
 
 // Dosen
@@ -110,7 +111,8 @@ export async function updateDosen(id: number, input: DosenInput): Promise<DosenI
 }
 
 export async function deleteDosen(id: number): Promise<void> {
-  await executeDelete("dosen", id, "id", standardRevalidatePaths("dosen"));
+  const dosen = await getDosen(id)
+  await executeDelete("dosen", id, "id", standardRevalidatePaths("dosen"), dosen?.image);
 }
 
 // Testimonials
@@ -153,7 +155,8 @@ export async function updateTestimonial(id: number, input: TestimonialInput): Pr
 }
 
 export async function deleteTestimonial(id: number): Promise<void> {
-  await executeDelete("testimonials", id, "id", standardRevalidatePaths("testimonials"));
+  const testimonial = await getTestimonial(id)
+  await executeDelete("testimonials", id, "id", standardRevalidatePaths("testimonials"), testimonial?.profile_image);
 }
 
 // Videos
@@ -195,7 +198,8 @@ export async function updateVideo(id: number, input: VideoInput): Promise<VideoI
 }
 
 export async function deleteVideo(id: number): Promise<void> {
-  await executeDelete("videos", id, "id", standardRevalidatePaths("videos"));
+  const video = await getVideo(id)
+  await executeDelete("videos", id, "id", standardRevalidatePaths("videos"), video?.thumbnail);
 }
 
 // Popups
@@ -253,7 +257,8 @@ export async function updatePopup(id: number, input: PopupInput): Promise<PopupI
 }
 
 export async function deletePopup(id: number): Promise<void> {
-  await executeDelete("popups", id, "id", standardRevalidatePaths("popups"));
+  const popup = await getPopup(id)
+  await executeDelete("popups", id, "id", standardRevalidatePaths("popups"), popup?.image);
 }
 
 // Programs
@@ -290,6 +295,10 @@ export async function getProgramBySlug(slug: string): Promise<ProgramItem | null
   return rows[0] ?? null;
 }
 
+export async function getProgram(id: number): Promise<ProgramItem | null> {
+  return executeGet<ProgramItem>("programs", id);
+}
+
 export async function createProgram(input: ProgramInput): Promise<ProgramItem> {
   const columns = ["slug", "title", "label", "image", "description", "short_description", "is_active", "sort_order"];
   const { columns: insertColumns, placeholders } = createInsertHelpers(columns);
@@ -306,7 +315,8 @@ export async function updateProgram(id: number, input: ProgramInput): Promise<Pr
 }
 
 export async function deleteProgram(id: number): Promise<void> {
-  await executeDelete("programs", id, "id", standardRevalidatePaths("programs"));
+  const program = await getProgram(id)
+  await executeDelete("programs", id, "id", standardRevalidatePaths("programs"), program?.image);
 }
 
 // Facilities
@@ -361,7 +371,8 @@ export async function updateFacility(id: number, oldSlug: string, input: Facilit
 }
 
 export async function deleteFacility(id: number, slug: string): Promise<void> {
-  await executeDelete("facilities", id, "id", ["/facility", `/facility/${slug}`, "/dashboard/facilities"]);
+  const facility = await getFacilityBySlug(slug)
+  await executeDelete("facilities", id, "id", ["/facility", `/facility/${slug}`, "/dashboard/facilities"], facility?.image);
 }
 
 // Information
@@ -396,6 +407,10 @@ export async function getInformationBySlug(slug: string): Promise<InformationIte
   return rows[0] ?? null;
 }
 
+export async function getInformation(id: number): Promise<InformationItem | null> {
+  return executeGet<InformationItem>("information", id);
+}
+
 export async function createInformation(input: InformationInput): Promise<InformationItem> {
   const columns = ["slug", "title", "image", "description", "is_active", "sort_order"];
   const { columns: insertColumns, placeholders } = createInsertHelpers(columns);
@@ -412,7 +427,8 @@ export async function updateInformation(id: number, input: InformationInput): Pr
 }
 
 export async function deleteInformation(id: number): Promise<void> {
-  await executeDelete("information", id, "id", standardRevalidatePaths("information"));
+  const info = await getInformation(id)
+  await executeDelete("information", id, "id", standardRevalidatePaths("information"), info?.image);
 }
 
 // Achievements
@@ -448,6 +464,10 @@ export async function getAchievementBySlug(slug: string): Promise<AchievementIte
   return rows[0] ?? null;
 }
 
+export async function getAchievement(id: number): Promise<AchievementItem | null> {
+  return executeGet<AchievementItem>("achievements", id);
+}
+
 export async function createAchievement(input: AchievementInput): Promise<AchievementItem> {
   const columns = ["slug", "title", "description", "image", "link_url", "is_active", "sort_order"];
   const { columns: insertColumns, placeholders } = createInsertHelpers(columns);
@@ -464,7 +484,8 @@ export async function updateAchievement(id: number, input: AchievementInput): Pr
 }
 
 export async function deleteAchievement(id: number): Promise<void> {
-  await executeDelete("achievements", id, "id", standardRevalidatePaths("achievements"));
+  const achievement = await getAchievement(id)
+  await executeDelete("achievements", id, "id", standardRevalidatePaths("achievements"), achievement?.image);
 }
 
 // Hero Slides
@@ -508,5 +529,6 @@ export async function updateHeroSlide(id: number, input: HeroSlideInput): Promis
 }
 
 export async function deleteHeroSlide(id: number): Promise<void> {
-  await executeDelete("hero_slides", id, "id", standardRevalidatePaths("hero_slides"));
+  const slide = await getHeroSlide(id)
+  await executeDelete("hero_slides", id, "id", standardRevalidatePaths("hero_slides"), slide?.image);
 }

@@ -74,14 +74,15 @@ export function EventCountdownCard({
         className,
       )}
     >
-       {/* Background image fills the entire card */}
+{/* Background image fills the entire card */}
        <Image
-         src={getSupabaseImageUrl(image) ?? "/images/hero-mobile.webp"}
-         alt={title ?? "Event"}
-         fill
-         sizes="(max-width: 768px) 92vw, 360px"
-         className="absolute inset-0 z-0 object-cover transition-transform duration-500 group-hover:scale-110"
-       />
+          src={getSupabaseImageUrl(image) ?? "/images/hero-mobile.webp"}
+          alt={title ?? "Event"}
+          fill
+          sizes="(max-width: 768px) 92vw, 360px"
+          className="absolute inset-0 z-0 object-cover transition-transform duration-500 group-hover:scale-110"
+          onError={(e) => { e.currentTarget.src = "/images/hero-mobile.webp"; }}
+        />
       {/* Light gradient 10 so image stays visible */}
       <div className="absolute inset-0 z-0 bg-gradient-to-t from-black/10 via-transparent to-transparent" />
 

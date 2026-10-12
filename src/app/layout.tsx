@@ -9,6 +9,7 @@ const montserrat = Montserrat({
   weight: ["400", "500", "600", "700", "800"],
   variable: "--font-montserrat",
   display: "swap",
+  preload: false,
 })
 
 const roboto = Roboto({
@@ -16,6 +17,7 @@ const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
   variable: "--font-roboto",
   display: "swap",
+  preload: false,
 })
 
 export const metadata: Metadata = {

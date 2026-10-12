@@ -6,6 +6,8 @@ import { motion } from "motion/react"
 import { cn } from "@/lib/utils"
 import { getSupabaseImageUrl } from "@/lib/image-utils"
 
+const PLACEHOLDER_IMAGE = "/images/hero-mobile.webp"
+
 export interface Frame {
   id: number
   image: string
@@ -37,14 +39,15 @@ function FrameComponent({
       }}
     >
       <div className="relative h-full w-full overflow-hidden">
-         <Image
-           src={getSupabaseImageUrl(image)}
-           alt=""
-           fill
-           sizes="33vw"
-           className="scale-105 object-cover transition-transform duration-700 ease-out will-change-transform"
-           style={{ transform: isHovered ? "scale(1.08)" : "scale(1.05)" }}
-         />
+<Image
+            src={getSupabaseImageUrl(image)}
+            alt=""
+            fill
+            sizes="33vw"
+            className="scale-105 object-cover transition-transform duration-700 ease-out will-change-transform"
+            style={{ transform: isHovered ? "scale(1.08)" : "scale(1.05)" }}
+            onError={(e) => { e.currentTarget.src = PLACEHOLDER_IMAGE; }}
+          />
         <div
           className="pointer-events-none absolute inset-0 transition-opacity duration-500"
           style={{

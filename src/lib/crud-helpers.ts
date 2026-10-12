@@ -1,5 +1,6 @@
 import { query } from "./db"
 import { revalidatePath } from "next/cache"
+import { deleteUploadedFile } from "./upload"
 
 // Helper to get next sort order
 export async function getNextSortOrder(tableName: string, sortOrderColumn: string = "sort_order"): Promise<number> {
@@ -132,9 +133,14 @@ export async function executeDelete(
   tableName: string,
   idValue: any,
   idColumn: string = "id",
-  revalidatePaths: string[] = ["/"]
+  revalidatePaths: string[] = ["/"],
+  imageUrl?: string
 ): Promise<void> {
   await query(`DELETE FROM ${tableName} WHERE ${idColumn} = $1`, [idValue]);
+  // Delete associated file from Supabase Storage
+  if (imageUrl) {
+    await deleteUploadedFile(imageUrl);
+  }
   // Revalidate paths
   for (const path of revalidatePaths) {
     revalidatePath(path);

@@ -6,6 +6,8 @@ import { motion, useReducedMotion } from "motion/react"
 import { cn } from "@/lib/utils"
 import { getSupabaseImageUrl } from "@/lib/image-utils"
 
+const PLACEHOLDER_IMAGE = "/images/hero-mobile.webp"
+
 export type DosenItem = {
   id: number
   name: string
@@ -83,13 +85,14 @@ export default function DosenAccordion({ items }: { items: DosenItem[] }) {
                 isActive ? "flex-[5]" : "flex-[0.6] hover:flex-[0.9]",
               )}
             >
-               <Image
-                 src={getSupabaseImageUrl(item.image)}
-                 alt={item.name}
-                 fill
-                 sizes="(max-width: 1024px) 100vw, 40vw"
-                 className="cursor-pointer object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
-               />
+<Image
+                  src={getSupabaseImageUrl(item.image)}
+                  alt={item.name}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                  className="cursor-pointer object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
+                  onError={(e) => { e.currentTarget.src = PLACEHOLDER_IMAGE; }}
+                />
               <div
                 className={cn(
                   "absolute inset-0 bg-black transition-opacity duration-300",

@@ -1,4 +1,3 @@
-import Image from "next/image"
 import { FaBookOpen, FaGlobe, FaLaptop, FaLightbulb } from "react-icons/fa6"
 import {
   CountUp,
@@ -9,6 +8,7 @@ import {
 import { Button } from "../ui/button"
 import { ArrowRightIcon } from "../ui/icons"
 import Link from "next/link"
+import { SafeImage } from "@/components/ui/SafeImage"
 
 export default function AboutUs() {
   const features = [
@@ -41,7 +41,7 @@ export default function AboutUs() {
         >
           <div className="space-y-4">
             <div className="relative h-[320px] overflow-hidden rounded-[80px_80px_0_80px] shadow-sm">
-              <Image
+              <SafeImage
                 src="/images/reguler.jpeg"
                 alt="Woman reading book"
                 fill
@@ -61,7 +61,7 @@ export default function AboutUs() {
           </div>
           <div className="space-y-4 pt-4">
             <div className="relative h-[200px] overflow-hidden rounded-[80px_80px_0_80px] shadow-sm">
-              <Image
+              <SafeImage
                 src="/images/hybrid.jpeg"
                 alt="Students studying"
                 fill
@@ -70,7 +70,7 @@ export default function AboutUs() {
               />
             </div>
             <div className="relative h-[260px] overflow-hidden rounded-[0_80px_80px_80px] shadow-sm">
-              <Image
+              <SafeImage
                 src="/images/online.jpeg"
                 alt="Teacher helping student"
                 fill

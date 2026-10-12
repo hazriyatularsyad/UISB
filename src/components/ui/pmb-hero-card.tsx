@@ -98,14 +98,15 @@ export default function PmbHeroCard({ items }: { items: PopupItem[] }) {
             "border border-border/50 shadow-lg shadow-black/5",
           )}
         >
-           {/* Background image fills the entire card */}
+{/* Background image fills the entire card */}
            <Image
-             src={getSupabaseImageUrl(current.image) || "/images/hero-mobile.webp"}
-             alt={current.title || "Informasi PMB"}
-             fill
-             sizes="360px"
-             className="absolute inset-0 z-0 object-cover transition-transform duration-500 group-hover:scale-110"
-           />
+              src={getSupabaseImageUrl(current.image) || "/images/hero-mobile.webp"}
+              alt={current.title || "Informasi PMB"}
+              fill
+              sizes="360px"
+              className="absolute inset-0 z-0 object-cover transition-transform duration-500 group-hover:scale-110"
+              onError={(e) => { e.currentTarget.src = "/images/hero-mobile.webp"; }}
+            />
           {/* Light gradient so image stays visible */}
           <div className="absolute inset-0 z-0 bg-gradient-to-t from-black/10 via-transparent to-transparent" />
 

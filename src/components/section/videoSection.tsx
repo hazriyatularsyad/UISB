@@ -8,6 +8,8 @@ import type { VideoItem } from "@/lib/data-store"
 import { Reveal } from "@/components/ui/reveal"
 import { cn } from "@/lib/utils"
 
+const PLACEHOLDER_IMAGE = "/images/hero-mobile.webp"
+
 function extractYoutubeId(urlOrId: string): string {
   const t = urlOrId.trim()
   if (!t.includes("/") && !t.includes("?") && t.length <= 20) return t
@@ -254,6 +256,7 @@ function CarouselCard({ item, isCenter, reduce, transform, zIndex, onClick, onPr
         sizes="(max-width: 768px) 80vw, 420px"
         className="object-cover transition-transform duration-700 group-hover:scale-105"
         priority={isCenter}
+        onError={(e) => { e.currentTarget.src = PLACEHOLDER_IMAGE; }}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 

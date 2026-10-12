@@ -7,6 +7,8 @@ import type { InformationItem } from "@/lib/data-store"
 import { Reveal } from "@/components/ui/reveal"
 import { getSupabaseImageUrl } from "@/lib/image-utils"
 
+const PLACEHOLDER_IMAGE = "/images/hero-mobile.webp"
+
 interface InformationProps {
   services: InformationItem[]
   initialSlug?: string
@@ -66,13 +68,14 @@ export default function Information({
 
           <div className="flex w-full justify-center md:col-span-5">
             <div className="relative aspect-[4/3] w-full max-w-[560px] overflow-hidden rounded-md bg-zinc-200 shadow-lg md:h-[650px] md:aspect-auto">
-               <Image
-                 src={getSupabaseImageUrl(activeService.image)}
-                 alt={activeService.title}
-                 fill
-                 sizes="(max-width: 768px) 100vw, 55vw"
-                 className="object-cover transition-all duration-500 ease-in-out"
-               />
+<Image
+                  src={getSupabaseImageUrl(activeService.image)}
+                  alt={activeService.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 55vw"
+                  className="object-cover transition-all duration-500 ease-in-out"
+                  onError={(e) => { e.currentTarget.src = PLACEHOLDER_IMAGE; }}
+                />
             </div>
           </div>
         </div>
