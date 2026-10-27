@@ -102,10 +102,18 @@ function uisb_meta(string $key, int $post_id = 0): string {
     return is_scalar($value) ? (string) $value : '';
 }
 function uisb_get_posts(string $type, int $count = 6, array $extra = []): WP_Query {
-    return new WP_Query(array_merge([
+    $args = [
         'post_type' => $type, 'post_status' => 'publish', 'posts_per_page' => $count,
         'orderby' => ['menu_order' => 'ASC', 'date' => 'DESC'], 'no_found_rows' => true,
-    ], $extra));
+    ];
+    if ($type !== 'post') {
+        $args['meta_query'] = [[
+            'relation' => 'OR',
+            ['key' => '_uisb_is_active', 'compare' => 'NOT EXISTS'],
+            ['key' => '_uisb_is_active', 'value' => '1', 'compare' => '='],
+        ]];
+    }
+    return new WP_Query(array_merge($args, $extra));
 }
 
 function uisb_primary_fallback(): void {
