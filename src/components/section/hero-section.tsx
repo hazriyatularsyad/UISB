@@ -174,7 +174,7 @@ export const HeroSection = ({
         <motion.div
           initial={{ opacity: 0, x: -60 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 3, delay: 1, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 3, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="absolute bottom-8 left-4 z-10 max-w-xl md:bottom-12 md:left-10 lg:left-16"
         >
           <h1 className="text-3xl font-extrabold leading-tight text-white sm:text-5xl">

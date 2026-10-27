@@ -58,7 +58,7 @@ export default function Navbar({
     <motion.div
       initial={reduceMotion ? false : { scale: 0.9, opacity: 0, y: -10 }}
       animate={{ scale: 1, opacity: 1, y: 0 }}
-      transition={{ duration: 1, delay: 1, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className="fixed left-1/2 top-4 z-50 w-[calc(100%-2rem)] -translate-x-1/2 md:w-[150vh]"
     >
       <motion.nav
@@ -235,7 +235,7 @@ function DesktopNavItem({
         href={item.href}
         initial={{ opacity: 0, y: -8 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1 + index * 0.05, duration: 1 }}
+        transition={{ delay: 0.1 + index * 0.05, duration: 0.4 }}
         whileHover={{ y: -2 }}
         className={linkClasses}
       >
@@ -251,7 +251,7 @@ function DesktopNavItem({
         href={item.href}
         initial={{ opacity: 0, y: -8 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1 + index * 0.05, duration: 1 }}
+        transition={{ delay: 0.1 + index * 0.05, duration: 0.4 }}
         whileHover={{ y: -2 }}
         className={linkClasses}
         aria-expanded={isOpen}
@@ -267,7 +267,7 @@ function DesktopNavItem({
           <motion.div
             initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.2 }}
             className="relative rounded-2xl border border-zinc-800 bg-zinc-900/95 p-6 shadow-2xl backdrop-blur-md"
           >
             <div className="absolute -top-2 left-1/2 h-4 w-4 -translate-x-1/2 rotate-45 border-l border-t border-zinc-800 bg-zinc-900" />
@@ -360,7 +360,7 @@ function MobileMenu({
     <motion.div
       initial={{ opacity: 0, y: -10, scale: 0.96 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.8, delay: 1, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
       className="absolute left-0 top-full mt-4 w-full overflow-hidden rounded-2xl border border-white/10 bg-white/95 p-6 shadow-2xl shadow-uisb-purple/20 backdrop-blur-xl md:hidden"
     >
       <div className="grid gap-y-1">
@@ -387,7 +387,7 @@ function MobileMenu({
                 onClick={onNavigate}
                 initial={{ opacity: 0, x: -16 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1 + i * 0.05, duration: 0.8 }}
+                transition={{ delay: 0.05 + i * 0.05, duration: 0.3 }}
                 whileTap={{ scale: 0.97 }}
                 className="rounded-lg px-3 py-3 text-sm font-medium tracking-widest text-amber-600 transition-colors hover:bg-uisb-purple/10 hover:text-uisb-purple"
               >
