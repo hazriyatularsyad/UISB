@@ -94,6 +94,28 @@ function uisb_filter_inactive_content(WP_Query $query): void {
 }
 add_action('pre_get_posts', 'uisb_filter_inactive_content');
 
+function uisb_hide_inactive_single(): void {
+    if (is_admin() || !is_singular()) {
+        return;
+    }
+    $post_id = get_queried_object_id();
+    if (!$post_id) {
+        return;
+    }
+    $managed_types = ['program', 'facility', 'achievement', 'dosen', 'testimonial', 'video', 'hero_slide', 'popup', 'information'];
+    if (!in_array(get_post_type($post_id), $managed_types, true)) {
+        return;
+    }
+    $active = get_post_meta($post_id, '_uisb_is_active', true);
+    if ($active === '0') {
+        global $wp_query;
+        $wp_query->set_404();
+        status_header(404);
+        nocache_headers();
+    }
+}
+add_action('template_redirect', 'uisb_hide_inactive_single');
+
 function uisb_excerpt(int $length = 24): string {
     return wp_trim_words(get_the_excerpt(), $length, '…');
 }
