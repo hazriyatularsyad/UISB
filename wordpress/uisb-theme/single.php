@@ -1,0 +1,3 @@
+<?php defined('ABSPATH') || exit; get_header(); ?>
+<main id="main-content" class="page-main"><header class="page-header"><div class="container"><p class="eyebrow"><?php echo esc_html(get_the_date()); ?></p><h1><?php the_title(); ?></h1><p class="page-intro"><?php echo esc_html(uisb_excerpt(30)); ?></p></div></header><div class="container content-layout"><?php while (have_posts()) : the_post(); ?><article <?php post_class('entry-content prose'); ?>><?php if (has_post_thumbnail()) : ?><figure class="featured-image"><?php the_post_thumbnail('large'); ?></figure><?php endif; ?><?php the_content(); ?></article><?php endwhile; ?></div></main>
+<?php get_footer(); ?>
