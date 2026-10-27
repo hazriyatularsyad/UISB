@@ -98,13 +98,16 @@ function uisb_meta_box_fields(): array {
         'program' => [
             'label' => ['text', 'Label program studi'],
             'short_description' => ['textarea', 'Deskripsi singkat'],
+            'is_active' => ['checkbox', 'Tampilkan program di website'],
         ],
         'facility' => [
             'short_description' => ['textarea', 'Deskripsi singkat'],
             'icon' => ['text', 'Nama ikon (opsional)'],
+            'is_active' => ['checkbox', 'Tampilkan fasilitas di website'],
         ],
         'achievement' => [
             'link_url' => ['url', 'URL terkait (opsional)'],
+            'is_active' => ['checkbox', 'Tampilkan prestasi di website'],
         ],
         'dosen' => [
             'title_role' => ['text', 'Jabatan / gelar'],
@@ -121,6 +124,7 @@ function uisb_meta_box_fields(): array {
             'device_type' => ['select', 'Tipe perangkat', ['desktop' => 'Desktop', 'mobile' => 'Mobile', 'both' => 'Keduanya']],
             'button_label' => ['text', 'Label tombol (opsional)'],
             'button_url' => ['url', 'URL tombol (opsional)'],
+            'is_active' => ['checkbox', 'Tampilkan slide di website'],
         ],
         'popup' => [
             'button_label' => ['text', 'Label tombol'],
@@ -130,6 +134,7 @@ function uisb_meta_box_fields(): array {
         ],
         'information' => [
             'link_url' => ['url', 'URL terkait (opsional)'],
+            'is_active' => ['checkbox', 'Tampilkan informasi di website'],
         ],
     ];
 }
