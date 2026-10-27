@@ -51,6 +51,10 @@ function uisb_import_image(string $url, int $post_id): void {
     if ($url === '') {
         return;
     }
+    $previous_url = (string) get_post_meta($post_id, '_uisb_source_image_url', true);
+    if ($previous_url === $url && has_post_thumbnail($post_id)) {
+        return;
+    }
     $parts = wp_parse_url($url);
     if (!is_array($parts) || ($parts['scheme'] ?? '') !== 'https' || empty($parts['host'])) {
         WP_CLI::warning("Skipping non-HTTPS or invalid image URL for post {$post_id}.");
@@ -67,6 +71,7 @@ function uisb_import_image(string $url, int $post_id): void {
         return;
     }
     set_post_thumbnail($post_id, (int) $attachment_id);
+    update_post_meta($post_id, '_uisb_source_image_url', esc_url_raw($url));
 }
 
 $created = 0;
