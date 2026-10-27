@@ -31,6 +31,17 @@ function uisb_register_content_types(): void {
         'popup' => ['Popup Informasi', 'Popup Informasi', 'dashicons-megaphone'],
         'information' => ['Informasi', 'Informasi', 'dashicons-info'],
     ];
+    $rewrite_slugs = [
+        'program' => 'academics',
+        'facility' => 'facility',
+        'achievement' => 'achievement',
+        'dosen' => 'dosen',
+        'testimonial' => 'testimonials',
+        'video' => 'videos',
+        'hero_slide' => 'hero-slide',
+        'popup' => 'popup',
+        'information' => 'information',
+    ];
     foreach ($types as $slug => $labels) {
         register_post_type($slug, [
             'labels' => [
@@ -41,10 +52,10 @@ function uisb_register_content_types(): void {
             ],
             'public' => true,
             'show_in_rest' => true,
-            'has_archive' => !in_array($slug, ['hero_slide', 'popup', 'testimonial', 'video'], true),
+            'has_archive' => in_array($slug, ['hero_slide', 'popup', 'testimonial', 'video'], true) ? false : ($slug === 'program' ? 'academics' : $slug),
             'menu_icon' => $labels[2],
             'supports' => ['title', 'editor', 'excerpt', 'thumbnail', 'page-attributes'],
-            'rewrite' => ['with_front' => false],
+            'rewrite' => ['slug' => $rewrite_slugs[$slug] ?? $slug, 'with_front' => false],
         ]);
     }
 }
