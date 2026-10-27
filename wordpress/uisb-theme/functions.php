@@ -61,6 +61,39 @@ function uisb_register_content_types(): void {
 }
 add_action('init', 'uisb_register_content_types');
 
+/**
+ * Hide explicitly inactive UISB content from public archive queries.
+ * Posts without the flag remain visible for backward compatibility.
+ */
+function uisb_filter_inactive_content(WP_Query $query): void {
+    if (is_admin() || !$query->is_main_query()) {
+        return;
+    }
+    $types = $query->get('post_type');
+    if (empty($types)) {
+        if (!$query->is_post_type_archive()) {
+            return;
+        }
+        $types = get_query_var('post_type');
+    }
+    $types = (array) $types;
+    $managed_types = ['program', 'facility', 'achievement', 'dosen', 'testimonial', 'video', 'hero_slide', 'popup', 'information'];
+    if (!array_intersect($types, $managed_types)) {
+        return;
+    }
+    $existing = $query->get('meta_query');
+    if (!is_array($existing)) {
+        $existing = [];
+    }
+    $existing[] = [
+        'relation' => 'OR',
+        ['key' => '_uisb_is_active', 'compare' => 'NOT EXISTS'],
+        ['key' => '_uisb_is_active', 'value' => '1', 'compare' => '='],
+    ];
+    $query->set('meta_query', $existing);
+}
+add_action('pre_get_posts', 'uisb_filter_inactive_content');
+
 function uisb_excerpt(int $length = 24): string {
     return wp_trim_words(get_the_excerpt(), $length, '…');
 }
