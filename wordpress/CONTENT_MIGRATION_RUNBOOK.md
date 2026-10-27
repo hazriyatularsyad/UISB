@@ -19,11 +19,11 @@ Export the tables defined in `src/lib/schema.sql` to one JSON object whose keys 
 
 Do not export `users` or `revoked_tokens`. WordPress should have its own user accounts and authentication; do not migrate Next.js password hashes or session revocations.
 
-Use a database client or a dedicated export script that has read-only credentials. Keep the resulting JSON outside the public web root and do not commit it to Git. Confirm that exported content does not include private information.
+Use the repository's `src/scripts/export-content.ts` script with a local `DATABASE_URL` configured outside Git. Run `npm install`, then `npm run db:export -- /tmp/uisb-export.json` from a trusted local copy of the repository. The script exports only the allowlisted content tables in a read-only transaction and excludes `users` and `revoked_tokens`. Verify the database target before running it. Keep the resulting JSON outside the repository and public web root; never commit it to Git or upload it to a public URL.
 
 ## 2. Run in staging
 
-1. Install WordPress on an isolated staging site with HTTPS and a current supported PHP version.
+1. Create an isolated WordPress staging site with HTTPS and a current supported PHP version. For Rumahweb cPanel, follow `wordpress/RUMAHWEB_STAGING_RUNBOOK.md`; use a separate document root and database, not the live site's.
 2. Back up the staging database and uploads.
 3. Install and activate `wordpress/uisb-theme`.
 4. Put the JSON file outside the web root, readable by the account running WP-CLI.
