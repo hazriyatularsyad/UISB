@@ -32,7 +32,6 @@ const truncate = (text: string, max: number) =>
 export const Carousel = ({ items }: iCarouselProps) => {
   const ref = useRef<HTMLDivElement>(null)
   const [active, setActive] = useState(0)
-  const [paused, setPaused] = useState(false)
   const reduce = useReducedMotion()
   const dragStartX = useRef(0)
   const scrollLeftStart = useRef(0)
@@ -70,16 +69,6 @@ export const Carousel = ({ items }: iCarouselProps) => {
     el.scrollTo({ left, behavior: reduce ? "auto" : "smooth" })
   }
 
-  // Auto-slide: maju ke card berikutnya tiap 6 detik; pause saat sentuh/hover.
-  useEffect(() => {
-    if (reduce || paused) return
-    const t = setInterval(() => {
-      const next = (active + 1) % items.length
-      goto(next)
-    }, 6000)
-    return () => clearInterval(t)
-  }, [active, items.length, paused, reduce])
-
   useEffect(check, [check])
 
   return (
@@ -87,10 +76,7 @@ export const Carousel = ({ items }: iCarouselProps) => {
       <div
         ref={ref}
         onScroll={check}
-        onPointerEnter={() => setPaused(true)}
-        onPointerLeave={() => setPaused(false)}
         onPointerDown={(e) => {
-          setPaused(true)
           if (!ref.current) return
           dragStartX.current = e.clientX
           scrollLeftStart.current = ref.current.scrollLeft
@@ -105,11 +91,9 @@ export const Carousel = ({ items }: iCarouselProps) => {
           ref.current.scrollLeft = scrollLeftStart.current - dx
         }}
         onPointerUp={() => {
-          setPaused(false)
           isDragging.current = false
         }}
         onPointerCancel={() => {
-          setPaused(false)
           isDragging.current = false
         }}
         style={{ touchAction: "pan-y", WebkitOverflowScrolling: "touch" }}
