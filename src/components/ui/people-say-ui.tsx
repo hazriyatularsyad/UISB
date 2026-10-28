@@ -25,17 +25,11 @@ const truncate = (text: string, max: number) =>
 /**
  * Horizontal scroll carousel with dot navigation.
  * Swipeable on mobile via native overflow-x scroll + CSS scroll-snap.
- * touch-action "manipulation": browser handles vertical page scroll and
- * pinch, while the container's native overflow-x still captures horizontal
- * swipe (pan-x alone can suppress vertical scrolling on touch).
  */
 export const Carousel = ({ items }: iCarouselProps) => {
   const ref = useRef<HTMLDivElement>(null)
   const [active, setActive] = useState(0)
   const reduce = useReducedMotion()
-  const dragStartX = useRef(0)
-  const scrollLeftStart = useRef(0)
-  const isDragging = useRef(false)
 
   const getCards = () =>
     Array.from(ref.current?.querySelectorAll<HTMLElement>("[data-card]") ?? [])
@@ -61,7 +55,6 @@ export const Carousel = ({ items }: iCarouselProps) => {
     const el = ref.current
     const card = getCards()[i]
     if (!el || !card) return
-    // scroll horizontal murni pada container carousel — tidak menyentuh halaman
     const rect = card.getBoundingClientRect()
     const elRect = el.getBoundingClientRect()
     const left =
@@ -69,39 +62,24 @@ export const Carousel = ({ items }: iCarouselProps) => {
     el.scrollTo({ left, behavior: reduce ? "auto" : "smooth" })
   }
 
-  useEffect(check, [check])
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    el.addEventListener("scroll", check, { passive: true })
+    check()
+    return () => el.removeEventListener("scroll", check)
+  }, [check])
 
   return (
     <div className="relative mt-10 w-full">
       <div
         ref={ref}
-        onScroll={check}
-        onPointerDown={(e) => {
-          if (!ref.current) return
-          dragStartX.current = e.clientX
-          scrollLeftStart.current = ref.current.scrollLeft
-          isDragging.current = true
-        }}
-        onPointerMove={(e) => {
-          if (!isDragging.current) return
-          if (!ref.current) return
-          const dx = e.clientX - dragStartX.current
-          // Optionally ignore vertical drag: if vertical movement > horizontal, do nothing?
-          // For simplicity, we just handle horizontal.
-          ref.current.scrollLeft = scrollLeftStart.current - dx
-        }}
-        onPointerUp={() => {
-          isDragging.current = false
-        }}
-        onPointerCancel={() => {
-          isDragging.current = false
-        }}
-        style={{ touchAction: "pan-y", WebkitOverflowScrolling: "touch" }}
+        style={{ touchAction: "pan-x pan-y", WebkitOverflowScrolling: "touch" }}
         className="flex w-full snap-x snap-mandatory overflow-x-scroll overscroll-x-contain py-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         <div className="mx-auto flex max-w-5xl flex-row justify-start gap-4 px-3 md:px-0">
           {items.map((item, i) => (
-            <div key={i} data-card className="shrink-0 snap-center rounded-3xl">
+            <div key={i} data-card className="shrink-0 snap-center rounded-3xl pointer-events-none">
               {item}
             </div>
           ))}
@@ -137,8 +115,8 @@ export const TestimonialCard = ({
   testimonial: iTestimonial
   backgroundImage?: string
 }) => (
-  <div className="select-none">
-    <div className="relative z-10 flex h-[450px] w-75 shrink-0 select-none flex-col items-center justify-center overflow-hidden rounded-3xl bg-slate-100 shadow-md md:h-[550px] md:w-96">
+  <div>
+    <div className="relative z-10 flex h-[450px] w-75 shrink-0 flex-col items-center justify-center overflow-hidden rounded-3xl bg-slate-100 shadow-md md:h-[550px] md:w-96">
 <Image
           src={getSupabaseImageUrl(backgroundImage)}
           alt="Card background"

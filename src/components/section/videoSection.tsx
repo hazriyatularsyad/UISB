@@ -121,10 +121,10 @@ export default function VideoSection({ items }: { items: VideoItem[] }) {
         {/* Controls */}
         <div className=" flex flex-col items-center gap-5">
           {/* Navigation arrows */}
-          <div className="flex items-center gap-3">
+          {/* <div className="flex items-center gap-3">
             <CarouselButton onClick={prev} aria-label="Previous video" direction="left" />
             <CarouselButton onClick={next} aria-label="Next video" direction="right" />
-          </div>
+          </div> */}
 
           {/* Current title */}
           <AnimatePresence mode="wait">
@@ -149,7 +149,7 @@ export default function VideoSection({ items }: { items: VideoItem[] }) {
             initial={reduce ? undefined : { opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={reduce ? undefined : { opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm"
             onClick={() => setSelectedVideo(null)}
           >
             <motion.div
@@ -186,7 +186,7 @@ export default function VideoSection({ items }: { items: VideoItem[] }) {
 
 function VideoHeader() {
   return (
-    <Reveal direction="up" className="mb-14 text-center">
+    <Reveal direction="up" className="text-center">
       <span className="mb-2 block text-xs font-bold uppercase tracking-[0.18em] text-uisb-purple">
         Media
       </span>
@@ -290,38 +290,38 @@ function CarouselCard({ item, isCenter, reduce, transform, zIndex, onClick, onPr
   )
 }
 
-function CarouselButton({
-  onClick,
-  direction,
-  "aria-label": ariaLabel,
-}: {
-  onClick: () => void
-  direction: "left" | "right"
-  "aria-label": string
-}) {
-  return (
-    <button
-      onClick={onClick}
-      aria-label={ariaLabel}
-      className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition-all duration-200 hover:border-uisb-purple hover:text-uisb-purple hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-uisb-purple focus-visible:ring-offset-2 active:scale-95"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="h-5 w-5"
-        aria-hidden="true"
-      >
-        {direction === "left" ? (
-          <path d="m15 18-6-6 6-6" />
-        ) : (
-          <path d="m9 18 6-6-6-6" />
-        )}
-      </svg>
-    </button>
-  )
-}
+// function CarouselButton({
+//   onClick,
+//   direction,
+//   "aria-label": ariaLabel,
+// }: {
+//   onClick: () => void
+//   direction: "left" | "right"
+//   "aria-label": string
+// }) {
+//   return (
+//     <button
+//       onClick={onClick}
+//       aria-label={ariaLabel}
+//       className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition-all duration-200 hover:border-uisb-purple hover:text-uisb-purple hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-uisb-purple focus-visible:ring-offset-2 active:scale-95"
+//     >
+//       <svg
+//         xmlns="http://www.w3.org/2000/svg"
+//         viewBox="0 0 24 24"
+//         fill="none"
+//         stroke="currentColor"
+//         strokeWidth="2"
+//         strokeLinecap="round"
+//         strokeLinejoin="round"
+//         className="h-5 w-5"
+//         aria-hidden="true"
+//       >
+//         {direction === "left" ? (
+//           <path d="m15 18-6-6 6-6" />
+//         ) : (
+//           <path d="m9 18 6-6-6-6" />
+//         )}
+//       </svg>
+//     </button>
+//   )
+// }
