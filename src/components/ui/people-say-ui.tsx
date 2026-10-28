@@ -153,7 +153,7 @@ export const TestimonialCard = ({
   testimonial: iTestimonial
   backgroundImage?: string
 }) => (
-  <div className="select-none touch-pan-x">
+  <div className="select-none">
     <div className="relative z-10 flex h-[450px] w-75 shrink-0 select-none flex-col items-center justify-center overflow-hidden rounded-3xl bg-slate-100 shadow-md md:h-[550px] md:w-96">
 <Image
           src={getSupabaseImageUrl(backgroundImage)}

@@ -242,7 +242,7 @@ function CarouselCard({ item, isCenter, reduce, transform, zIndex, onClick, onPr
         zIndex,
       }}
       className={cn(
-        "group absolute aspect-[4/3] w-[78vw] max-w-[420px] cursor-pointer overflow-hidden bg-slate-900 shadow-2xl will-change-transform focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-uisb-purple focus-visible:ring-offset-4 md:w-[420px]",
+        "group absolute aspect-[4/3] w-[60vw] max-w-[420px] cursor-pointer overflow-hidden bg-slate-900 shadow-2xl will-change-transform focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-uisb-purple focus-visible:ring-offset-4 md:w-[420px]",
         isCenter ? "shadow-uisb-purple/20" : "shadow-black/20",
       )}
     >
